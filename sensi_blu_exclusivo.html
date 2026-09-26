@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 SENSI EXCLUSIVA — BLU</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+        :root{--pri:#22c55e;--sec:#16a34a;--fondo:#0f172a;--tarjeta:#1e293b;--borde:#2e476d;--texto:#e2e8f0;--gris:#94a3b8;--azul:#3b82f6;--naranja:#f97316}
+        body{background:var(--fondo);color:var(--texto);min-height:100vh;padding:20px}
+        .contenedor{max-width:450px;margin:0 auto}
+        h1{text-align:center;color:var(--pri);font-size:24px;margin-bottom:5px}
+        .sub{text-align:center;color:var(--gris);margin-bottom:20px}
+        .sello{background:linear-gradient(90deg,var(--pri),var(--azul));color:#fff;text-align:center;padding:8px;border-radius:10px;margin-bottom:20px;font-weight:bold}
+        .tarjeta{background:var(--tarjeta);border-radius:16px;padding:20px;margin-bottom:15px;border:1px solid var(--borde)}
+        label{display:block;margin-bottom:8px;font-weight:bold;color:var(--pri)}
+        select,input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--borde);background:var(--fondo);color:var(--texto);font-size:16px;margin-bottom:15px}
+        button{width:100%;padding:14px;border:none;border-radius:12px;font-size:17px;font-weight:bold;cursor:pointer;transition:.2s}
+        .btn-generar{background:linear-gradient(90deg,var(--pri),var(--sec));color:#000;margin-top:10px}
+        .btn-copiar{background:var(--naranja);color:#fff;margin-top:8px}
+        .resultado{margin-top:20px;display:none}
+        .resultado.mostrar{display:block}
+        .fila{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--borde)}
+        .fila:last-child{border:none}
+        .etiqueta{font-weight:bold}
+        .valor{color:var(--pri);font-weight:bold;font-size:18px}
+        .seccion{margin-top:15px;padding-top:15px;border-top:1px dashed var(--borde)}
+        .tit-sec{color:var(--azul);font-weight:bold;margin-bottom:10px}
+        .copiado{background:#10b981;color:#fff;padding:10px;border-radius:8px;text-align:center;margin-top:10px;display:none}
+        .destacado{background:rgba(34,197,94,.15);border:1px solid var(--pri);border-radius:10px;padding:12px;margin-bottom:15px}
+        .modelo-activo{color:var(--azul);font-weight:bold}
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <div class="sello">💚 EXCLUSIVO PARA DISPOSITIVOS BLU 💚</div>
+    
+    <h1>🔥 GENERADOR DE SENSI</h1>
+    <p class="sub">Calibrada especialmente para tu celular BLU</p>
+
+    <div class="tarjeta">
+        <div class="destacado">
+            📱 Tu modelo detectado: <span class="modelo-activo" id="tu-modelo">BLU G91S ✅</span>
+        </div>
+
+        <label>📲 Elige tu modelo BLU</label>
+        <select id="modelo_blu" onchange="cambiarModelo()">
+            <option value="g91s" selected>BLU G91S — 6.8" / 6000mAh ✅</option>
+            <option value="g90">BLU G90 / G90 Pro — 6.5"</option>
+            <option value="g9_pro">BLU G9 Pro — 6.3"</option>
+            <option value="g8_plus">BLU G8+ / G8 — 6.2"</option>
+            <option value="g7">BLU G7 / G70 / G71 — 6.5"</option>
+            <option value="g6">BLU G6 / G60 — 5.7"</option>
+            <option value="studio">BLU Studio (Series X / Mega) — 6.0"+</option>
+            <option value="view">BLU View / View 2 / View 3 — 5.5"</option>
+            <option value="bold">BLU Bold — Pantalla compacta</option>
+            <option value="personalizado">Otro modelo BLU (Ajuste manual)</option>
+        </select>
+
+        <label>🎯 Estilo de juego</label>
+        <select id="estilo">
+            <option value="agresivo" selected>Agresivo / Todo Rojo 🔥</option>
+            <option value="equilibrado">Equilibrado ⚖️</option>
+            <option value="defensivo">Defensivo / Preciso 🎯</option>
+        </select>
+
+        <label>⚡ Rendimiento de tu BLU</label>
+        <select id="rendimiento">
+            <option value="bueno">Bueno — Juega fluido ✅</option>
+            <option value="medio" selected>Medio — Algunos bajones</option>
+            <option value="bajo">Bajo — Se traba un poco</option>
+        </select>
+
+        <button class="btn-generar" onclick="generar()">✨ GENERAR SENSI EXACTA</button>
+    </div>
+
+    <div class="tarjeta resultado" id="caja-resultado">
+        <h3 style="text-align:center;color:var(--pri);margin-bottom:15px">✅ TU SENSI LISTA — <span id="nombre-modelo"></span></h3>
+        
+        <div class="tit-sec">🎯 VALORES EN JUEGO (1–200)</div>
+        <div class="fila"><span class="etiqueta">General</span><span class="valor" id="v-gen">0</span></div>
+        <div class="fila"><span class="etiqueta">Punto Rojo</span><span class="valor" id="v-punto">0</span></div>
+        <div class="fila"><span class="etiqueta">Mira 2x</span><span class="valor" id="v-2x">0</span></div>
+        <div class="fila"><span class="etiqueta">Mira 4x</span><span class="valor" id="v-4x">0</span></div>
+        <div class="fila"><span class="etiqueta">Francotirador</span><span class="valor" id="v-franco">0</span></div>
+        <div class="fila"><span class="etiqueta">Cámara 360</span><span class="valor" id="v-cam">0</span></div>
+
+        <div class="seccion">
+            <div class="tit-sec">📱 AJUSTES DEL BLU</div>
+            <div class="fila"><span class="etiqueta">Ancho mínimo</span><span class="valor" id="v-ancho">0</span></div>
+            <div class="fila"><span class="etiqueta">Botón de disparo</span><span class="valor" id="v-boton">0</span></div>
+            <div class="fila"><span class="etiqueta">Velocidad puntero</span><span class="valor" id="v-puntero">Máxima</span></div>
+        </div>
+
+        <div class="seccion">
+            <div class="tit-sec">💡 CONSEJOS PARA TU BLU</div>
+            <p id="consejo-blu" style="color:var(--gris);line-height:1.6"></p>
+        </div>
+
+        <button class="btn-copiar" onclick="copiar()">📋 COPIAR TODO</button>
+        <div class="copiado" id="copiado-msg">✅ ¡Copiado al portapapeles!</div>
+    </div>
+</div>
+
+<script>
+// DATOS EXCLUSIVOS POR MODELO BLU
+const modelos = {
+    g91s: {nombre:'BLU G91S',pantalla:6.8,baseG:195,baseP:192,base2:188,base4:182,baseF:95,baseC:200,ancho:500,boton:48,consejo:'Pantalla grande 6.8" → arrastra en forma de "J" bien abierta. No pongas el botón pegado al borde. Batería 6000mAh = juega horas sin preocuparte ✅'},
+    g90: {nombre:'BLU G90 / G90 Pro',pantalla:6.5,baseG:192,baseP:188,base2:184,base4:178,baseF:93,baseC:198,ancho:480,boton:50,consejo:'Pantalla equilibrada. Sube la mira recta y suave. Si se pasa, baja General -3. Activa modo rendimiento en ajustes ✅'},
+    g9_pro: {nombre:'BLU G9 Pro',pantalla:6.3,baseG:190,baseP:185,base2:180,base4:174,baseF:92,baseC:195,ancho:460,boton:51,consejo:'Pantalla nítida. Toca ligero, no presiones fuerte. Cierra apps antes de jugar para más fluidez ✅'},
+    g8_plus: {nombre:'BLU G8+ / G8',pantalla:6.2,baseG:188,baseP:184,base2:178,base4:170,baseF:90,baseC:192,ancho:440,boton:52,consejo:'Pantalla compacta. Deja más espacio al botón de disparo. Ancho mínimo en 440 ✅'},
+    g7: {nombre:'BLU G7 / G70 / G71',pantalla:6.5,baseG:185,baseP:180,base2:175,base4:168,baseF:88,baseC:190,ancho:430,boton:53,consejo:'Pantalla amplia pero sensible. Ajusta de 2 en 2. Si se traba, baja gráficos a SUAVE ✅'},
+    g6: {nombre:'BLU G6 / G60',pantalla:5.7,baseG:182,baseP:176,base2:170,base4:162,baseF:85,baseC:188,ancho:410,boton:55,consejo:'Pantalla pequeña → botón más grande. Movimientos cortos y precisos. Gráficos en SUAVE ✅'},
+    studio: {nombre:'BLU Studio',pantalla:6.2,baseG:186,baseP:182,base2:176,base4:168,baseF:89,baseC:191,ancho:435,boton:52,consejo:'Pantalla luminosa. Brillo al máximo. Cierra todo antes de entrar a jugar ✅'},
+    view: {nombre:'BLU View',pantalla:5.5,baseG:178,baseP:172,base2:165,base4:158,baseF:82,baseC:185,ancho:390,boton:56,consejo:'Pantalla pequeña y básica. Todo al mínimo. Movimientos suaves, no des tirón fuerte ✅'},
+    bold: {nombre:'BLU Bold',pantalla:6.0,baseG:184,baseP:178,base2:172,base4:165,baseF:87,baseC:189,ancho:420,boton:53,consejo:'Diseño compacto. Ancho mínimo en 420. Botón en 53%. Prueba en Entrenamiento primero ✅'},
+    personalizado: {nombre:'Modelo BLU Personalizado',pantalla:6.5,baseG:190,baseP:185,base2:180,base4:172,baseF:90,baseC:195,ancho:450,boton:50,consejo:'Ajusta según tu pantalla. Si es grande → sube valores. Si es pequeño → baja. Prueba y ajusta de 1 en 1 ✅'}
+};
+
+const ajustesEstilo = {
+    agresivo: {g:5,p:4,x2:3,x4:2,f:-2,c:5},
+    equilibrado: {g:0,p:0,x2:0,x4:0,f:0,c:0},
+    defensivo: {g:-6,p:-5,x2:-3,x4:-2,f:4,c:-4}
+};
+
+const ajustesRendimiento = {
+    bueno: {g:3,p:2,x2:2,x4:1,f:1,c:3,ancho:+20},
+    medio: {g:0,p:0,x2:0,x4:0,f:0,c:0,ancho:0},
+    bajo: {g:-4,p:-3,x2:-2,x4:-1,f:-1,c:-3,ancho:-20}
+};
+
+function limitar(v){ return Math.max(60,Math.min(200,Math.round(v))); }
+
+function cambiarModelo(){
+    const sel = document.getElementById('modelo_blu');
+    document.getElementById('tu-modelo').textContent = sel.options[sel.selectedIndex].text + ' ✅';
+    document.getElementById('caja-resultado').classList.remove('mostrar');
+}
+
+function generar(){
+    const mod = document.getElementById('modelo_blu').value;
+    const est = document.getElementById('estilo').value;
+    const ren = document.getElementById('rendimiento').value;
+
+    const m = modelos[mod];
+    const e = ajustesEstilo[est];
+    const r = ajustesRendimiento[ren];
+
+    document.getElementById('nombre-modelo').textContent = m.nombre;
+    document.getElementById('v-gen').textContent = limitar(m.baseG + e.g + r.g);
+    document.getElementById('v-punto').textContent = limitar(m.baseP + e.p + r.p);
+    document.getElementById('v-2x').textContent = limitar(m.base2 + e.x2 + r.x2);
+    document.getElementById('v-4x').textContent = limitar(m.base4 + e.x4 + r.x4);
+    document.getElementById('v-franco').textContent = limitar(m.baseF + e.f + r.f);
+    document.getElementById('v-cam').textContent = limitar(m.baseC + e.c + r.c);
+    document.getElementById('v-ancho').textContent = m.ancho + r.ancho;
+    document.getElementById('v-boton').textContent = m.boton + '%';
+    document.getElementById('consejo-blu').textContent = m.consejo;
+
+    document.getElementById('caja-resultado').classList.add('mostrar');
+}
+
+function copiar(){
+    const txt = `🔥 SENSI EXCLUSIVA — ${document.getElementById('nombre-modelo').textContent}
+
+🎯 VALORES EN JUEGO:
+• General:        ${document.getElementById('v-gen').textContent}
+• Punto Rojo:     ${document.getElementById('v-punto').textContent}
+• Mira 2x:        ${document.getElementById('v-2x').textContent}
+• Mira 4x:        ${document.getElementById('v-4x').textContent}
+• Francotirador:   ${document.getElementById('v-franco').textContent}
+• Cámara 360:     ${document.getElementById('v-cam').textContent}
+
+📱 AJUSTES DEL TELÉFONO:
+• Ancho mínimo: ${document.getElementById('v-ancho').textContent}
+• Botón disparo: ${document.getElementById('v-boton').textContent}
+• Velocidad puntero: Al MÁXIMO
+
+💡 CONSEJO:
+${document.getElementById('consejo-blu').textContent}
+
+— Generado para tu BLU 💚`;
+
+    navigator.clipboard.writeText(txt).then(()=>{
+        const m = document.getElementById('copiado-msg');
+        m.style.display = 'block';
+        setTimeout(()=>m.style.display='none',2500);
+    });
+}
+</script>
+</body>
+</html>
