@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚔️ SENSIBILIDAD iOS — manuelmods12</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+:root{--dorado:#FFD700;--rojo:#FF2020;--negro:#050505;--blanco:#fff;--gris:#1a1a1a}
+
+body{
+  background:
+    radial-gradient(circle at top left, rgba(255,32,32,.15), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255,215,0,.15), transparent 35%),
+    linear-gradient(#080808, #050505);
+  min-height:100vh;
+  padding:25px 15px;
+  color:var(--blanco);
+}
+
+.contenedor{max-width:460px;margin:0 auto}
+
+/* === PERFIL SIN FOTO, SOLO LETRAS === */
+.perfil{
+  text-align:center;
+  margin-bottom:35px;
+  padding:30px 20px;
+  border-radius:20px;
+  background:
+    linear-gradient(135deg, rgba(255,215,0,.08), rgba(255,32,32,.08));
+  border:1px solid rgba(255,215,0,.25);
+  box-shadow:0 0 30px rgba(255,215,0,.15);
+  position:relative;
+  overflow:hidden;
+}
+
+.perfil::before{
+  content:'';
+  position:absolute;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle, rgba(255,215,0,.15), transparent);
+  top:-60px;
+  right:-60px;
+  border-radius:50%;
+}
+
+.nombre-perfil{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:2px;
+  background:linear-gradient(90deg, var(--dorado), var(--rojo), var(--dorado));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation: brillo 3s linear infinite;
+  text-shadow:none;
+  filter:drop-shadow(0 0 10px rgba(255,215,0,.45));
+  margin-bottom:8px;
+}
+
+@keyframes brillo{
+  0%{background-position:0% center}
+  100%{background-position:200% center}
+}
+
+.subtitulo{
+  color:#bbb;
+  font-size:15px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+/* === TARJETAS === */
+.tarjeta{
+  background:var(--gris);
+  border:1px solid rgba(255,215,0,.2);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 4px 25px rgba(0,0,0,.5);
+}
+
+label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:700;
+  color:var(--dorado);
+  font-size:15px;
+}
+
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid rgba(255,215,0,.35);
+  border-radius:10px;
+  font-size:16px;
+  background:#111;
+  color:#fff;
+  outline:none;
+}
+
+select:focus{
+  border-color:var(--dorado);
+  box-shadow:0 0 0 3px rgba(255,215,0,.15);
+}
+
+.btn-generar{
+  width:100%;
+  padding:15px;
+  background:linear-gradient(90deg, var(--dorado), var(--rojo));
+  color:#000;
+  border:none;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:900;
+  cursor:pointer;
+  margin:12px 0;
+  box-shadow:0 0 20px rgba(255,215,0,.45);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.btn-generar:active{
+  transform:scale(.97);
+  box-shadow:0 0 30px rgba(255,215,0,.65);
+}
+
+.btn-copiar{
+  width:100%;
+  padding:13px;
+  background:linear-gradient(90deg, var(--dorado), var(--rojo));
+  color:#000;
+  border:none;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  margin-top:15px;
+  transition:transform .2s ease;
+}
+
+.btn-copiar:active{
+  transform:scale(.97);
+}
+
+.resultado{
+  margin-top:20px;
+  display:none;
+  animation: aparece .5s ease-out;
+}
+
+.resultado.mostrar{
+  display:block;
+}
+
+@keyframes aparece{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.fila{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,215,0,.15);
+}
+
+.fila:last-child{
+  border-bottom:none;
+}
+
+.etiqueta{
+  font-weight:600;
+  color:#ccc;
+}
+
+.valor{
+  font-weight:900;
+  color:var(--dorado);
+  font-size:18px;
+  text-shadow:0 0 8px rgba(255,215,0,.35);
+}
+
+.tit-sec{
+  font-size:21px;
+  font-weight:900;
+  margin-bottom:15px;
+  color:var(--dorado);
+  text-align:center;
+  letter-spacing:1px;
+}
+
+/* === RESPONSIVO === */
+@media(max-width:480px){
+  .nombre-perfil{
+    font-size:32px;
+  }
+
+  .subtitulo{
+    font-size:13px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="contenedor">
+
+  <!-- === PERFIL CON LETRAS GRANDES === -->
+  <div class="perfil">
+    <h1 class="nombre-perfil">MANUELMODS12</h1>
+    <p class="subtitulo">SENSIBILIDAD • iOS • FREE FIRE</p>
+  </div>
+
+  <!-- === SELECCIÓN DE MODELO === -->
+  <div class="tarjeta">
+    <label>🍎 Tu Modelo de iPhone:</label>
+    <select id="modelo_ios">
+      <option value="">— Elige tu iPhone —</option>
+      <option value="iphone_se">iPhone SE (2da/3ra gen)</option>
+      <option value="iphone_11">iPhone 11 / 11 Pro / 11 Pro Max</option>
+      <option value="iphone_12">iPhone 12 / 12 Pro / 12 Pro Max</option>
+      <option value="iphone_13">iPhone 13 / 13 Pro / 13 Pro Max</option>
+      <option value="iphone_14">iPhone 14 / 14 Plus / 14 Pro / Pro Max</option>
+      <option value="iphone_15">iPhone 15 / 15 Plus / 15 Pro / Pro Max</option>
+      <option value="iphone_16">iPhone 16 / 16 Plus / 16 Pro / Pro Max</option>
+    </select>
+  </parameter>
+</function>
+</div>
+</body>
+</html>
