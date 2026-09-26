@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚔️ SENSIBILIDAD iOS — manuelmods12</title>
+<title>⚔️ Sensy VIP Exclusiva V1.2 — manuelmods12</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-:root{--dorado:#FFD700;--rojo:#FF2020;--negro:#050505;--blanco:#fff;--gris:#1a1a1a}
-
+:root{--dorado:#FFD700;--rojo:#FF2020;--fuego:#FF6600;--negro:#050505;--blanco:#fff}
 body{
   background:
     radial-gradient(circle at top left, rgba(255,32,32,.15), transparent 35%),
@@ -17,83 +16,59 @@ body{
   padding:25px 15px;
   color:var(--blanco);
 }
-
 .contenedor{max-width:460px;margin:0 auto}
 
-/* === PERFIL SIN FOTO, SOLO LETRAS === */
+/* === PERFIL === */
 .perfil{
   text-align:center;
-  margin-bottom:35px;
-  padding:30px 20px;
+  margin-bottom:25px;
+  padding:25px 20px;
   border-radius:20px;
-  background:
-    linear-gradient(135deg, rgba(255,215,0,.08), rgba(255,32,32,.08));
-  border:1px solid rgba(255,215,0,.25);
+  background:linear-gradient(135deg, rgba(255,215,0,.08), rgba(255,32,32,.08));
+  border:2px solid rgba(255,215,0,.35);
   box-shadow:0 0 30px rgba(255,215,0,.15);
-  position:relative;
-  overflow:hidden;
 }
-
-.perfil::before{
-  content:'';
-  position:absolute;
-  width:120px;
-  height:120px;
-  background:radial-gradient(circle, rgba(255,215,0,.15), transparent);
-  top:-60px;
-  right:-60px;
-  border-radius:50%;
-}
-
 .nombre-perfil{
-  font-size:38px;
+  font-size:30px;
   font-weight:900;
-  letter-spacing:2px;
   background:linear-gradient(90deg, var(--dorado), var(--rojo), var(--dorado));
   background-size:200% auto;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
-  animation: brillo 3s linear infinite;
-  text-shadow:none;
+  animation:brillo 3s linear infinite;
   filter:drop-shadow(0 0 10px rgba(255,215,0,.45));
-  margin-bottom:8px;
+  margin-bottom:5px;
 }
-
 @keyframes brillo{
   0%{background-position:0% center}
   100%{background-position:200% center}
 }
-
-.subtitulo{
-  color:#bbb;
-  font-size:15px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  font-weight:600;
-}
+.subtitulo{color:#bbb;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.version{color:var(--dorado);font-size:14px;font-weight:bold;margin-top:8px}
 
 /* === TARJETAS === */
 .tarjeta{
-  background:var(--gris);
+  background:#1a1a1a;
   border:1px solid rgba(255,215,0,.2);
   border-radius:16px;
-  padding:22px;
-  margin-bottom:18px;
-  box-shadow:0 4px 25px rgba(0,0,0,.5);
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
 }
-
-label{
-  display:block;
-  margin-bottom:10px;
-  font-weight:700;
+.tit-seccion{
+  font-size:18px;
+  font-weight:900;
   color:var(--dorado);
-  font-size:15px;
+  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
-
+label{display:block;margin-bottom:10px;font-weight:700;color:var(--dorado);font-size:15px}
 select{
   width:100%;
-  padding:14px;
+  padding:13px;
   border:1px solid rgba(255,215,0,.35);
   border-radius:10px;
   font-size:16px;
@@ -101,15 +76,12 @@ select{
   color:#fff;
   outline:none;
 }
+select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)}
 
-select:focus{
-  border-color:var(--dorado);
-  box-shadow:0 0 0 3px rgba(255,215,0,.15);
-}
-
+/* === BOTONES === */
 .btn-generar{
   width:100%;
-  padding:15px;
+  padding:14px;
   background:linear-gradient(90deg, var(--dorado), var(--rojo));
   color:#000;
   border:none;
@@ -117,116 +89,241 @@ select:focus{
   font-size:17px;
   font-weight:900;
   cursor:pointer;
-  margin:12px 0;
+  margin:10px 0;
   box-shadow:0 0 20px rgba(255,215,0,.45);
-  transition:transform .2s ease, box-shadow .2s ease;
+  transition:transform .2s ease;
 }
-
-.btn-generar:active{
-  transform:scale(.97);
-  box-shadow:0 0 30px rgba(255,215,0,.65);
-}
-
+.btn-generar:active{transform:scale(.97)}
 .btn-copiar{
   width:100%;
-  padding:13px;
+  padding:12px;
   background:linear-gradient(90deg, var(--dorado), var(--rojo));
   color:#000;
   border:none;
   border-radius:10px;
   font-weight:800;
   cursor:pointer;
-  margin-top:15px;
-  transition:transform .2s ease;
+  margin-top:12px;
 }
 
-.btn-copiar:active{
-  transform:scale(.97);
-}
+/* === RESULTADOS === */
+.resultado{margin-top:15px;display:none;animation:aparece .5s ease-out}
+.resultado.mostrar{display:block}
+@keyframes aparece{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fila{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,215,0,.12)}
+.fila:last-child{border-bottom:none}
+.etiqueta{font-weight:600;color:#ccc;font-size:14px}
+.valor{font-weight:900;color:var(--dorado);font-size:17px;text-shadow:0 0 8px rgba(255,215,0,.35)}
 
-.resultado{
-  margin-top:20px;
-  display:none;
-  animation: aparece .5s ease-out;
-}
-
-.resultado.mostrar{
-  display:block;
-}
-
-@keyframes aparece{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-.fila{
-  display:flex;
-  justify-content:space-between;
-  padding:12px 0;
-  border-bottom:1px solid rgba(255,215,0,.15);
-}
-
-.fila:last-child{
-  border-bottom:none;
-}
-
-.etiqueta{
-  font-weight:600;
-  color:#ccc;
-}
-
-.valor{
-  font-weight:900;
-  color:var(--dorado);
-  font-size:18px;
-  text-shadow:0 0 8px rgba(255,215,0,.35);
-}
-
-.tit-sec{
-  font-size:21px;
-  font-weight:900;
-  margin-bottom:15px;
-  color:var(--dorado);
+/* === BOTONES DE PESTAÑA === */
+.pestanas{display:flex;gap:8px;margin-bottom:15px}
+.pestana{
+  flex:1;
+  padding:10px;
+  background:#222;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:#aaa;
+  font-weight:700;
   text-align:center;
-  letter-spacing:1px;
+  cursor:pointer;
+  transition:.2s
 }
-
-/* === RESPONSIVO === */
-@media(max-width:480px){
-  .nombre-perfil{
-    font-size:32px;
-  }
-
-  .subtitulo{
-    font-size:13px;
-  }
+.pestana.activa{
+  background:rgba(255,215,0,.1);
+  border-color:var(--dorado);
+  color:var(--dorado);
+  box-shadow:0 0 10px rgba(255,215,0,.2)
 }
+.contenido-pestana{display:none}
+.contenido-pestana.visible{display:block}
+
+/* === LISTAS DE CONSEJOS === */
+.lista-consejos{list-style:none}
+.lista-consejos li{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,215,0,.1);
+  font-size:14px;
+  line-height:1.5
+}
+.lista-consejos li:last-child{border-bottom:none}
+.numero{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  background:var(--dorado);
+  color:#000;
+  border-radius:50%;
+  font-weight:900;
+  font-size:12px;
+  margin-right:10px
+}
+.dato{color:var(--dorado);font-weight:700}
 </style>
 </head>
 <body>
 <div class="contenedor">
 
-  <!-- === PERFIL CON LETRAS GRANDES === -->
+  <!-- === PERFIL === -->
   <div class="perfil">
     <h1 class="nombre-perfil">MANUELMODS12</h1>
-    <p class="subtitulo">SENSIBILIDAD • iOS • FREE FIRE</p>
+    <p class="subtitulo">Generador De Sensibilidad VIP Exclusiva</p>
+    <p class="version">⚔️ VERSIÓN V1.2 ⚔️</p>
   </div>
 
-  <!-- === SELECCIÓN DE MODELO === -->
-  <div class="tarjeta">
-    <label>🍎 Tu Modelo de iPhone:</label>
-    <select id="modelo_ios">
-      <option value="">— Elige tu iPhone —</option>
-      <option value="iphone_se">iPhone SE (2da/3ra gen)</option>
-      <option value="iphone_11">iPhone 11 / 11 Pro / 11 Pro Max</option>
-      <option value="iphone_12">iPhone 12 / 12 Pro / 12 Pro Max</option>
-      <option value="iphone_13">iPhone 13 / 13 Pro / 13 Pro Max</option>
-      <option value="iphone_14">iPhone 14 / 14 Plus / 14 Pro / Pro Max</option>
-      <option value="iphone_15">iPhone 15 / 15 Plus / 15 Pro / Pro Max</option>
-      <option value="iphone_16">iPhone 16 / 16 Plus / 16 Pro / Pro Max</option>
-    </select>
-  </parameter>
-</function>
+  <!-- === PESTAÑAS === -->
+  <div class="pestanas">
+    <div class="pestana activa" onclick="cambiarPestana('sensi')">🎯 Sensy</div>
+    <div class="pestana" onclick="cambiarPestana('boton')">🔥 Botón</div>
+    <div class="pestana" onclick="cambiarPestana('config')">⚙️ Teléfono</div>
+    <div class="pestana" onclick="cambiarPestana('consejos')">💡 Miras</div>
+  </div>
+
+  <!-- === PESTAÑA 1: SENSIBILIDAD === -->
+  <div class="contenido-pestana visible" id="p_sensi">
+    <div class="tarjeta">
+      <label>🍎 Tu Modelo de iPhone:</label>
+      <select id="modelo_ios">
+        <option value="">— Elige tu iPhone —</option>
+        <option value="iphone_se">iPhone SE (2da/3ra gen)</option>
+        <option value="iphone_11">iPhone 11 / 11 Pro / 11 Pro Max</option>
+        <option value="iphone_12">iPhone 12 / 12 Pro / 12 Pro Max</option>
+        <option value="iphone_13">iPhone 13 / 13 Pro / 13 Pro Max</option>
+        <option value="iphone_14">iPhone 14 / 14 Plus / 14 Pro / Pro Max</option>
+        <option value="iphone_15">iPhone 15 / 15 Plus / 15 Pro / Pro Max</option>
+        <option value="iphone_16">iPhone 16 / 16 Plus / 16 Pro / Pro Max</option>
+      </select>
+    </div>
+
+    <button class="btn-generar" onclick="generarSensi()">
+      ⚔️ GENERAR MI SENSIBILIDAD
+    </button>
+
+    <div class="tarjeta resultado" id="caja_resultado">
+      <p class="tit-seccion">✅ TU CONFIGURACIÓN LISTA</p>
+      <div class="fila"><span class="etiqueta">General</span><span class="valor" id="res_general">—</span></div>
+      <div class="fila"><span class="etiqueta">Mira de Punto</span><span class="valor" id="res_punto">—</span></div>
+      <div class="fila"><span class="etiqueta">Mira de Línea</span><span class="valor" id="res_linea">—</span></div>
+      <div class="fila"><span class="etiqueta">Mira Roja</span><span class="valor" id="res_roja">—</span></div>
+      <div class="fila"><span class="etiqueta">Mira 2x</span><span class="valor" id="res_2x">—</span></div>
+      <div class="fila"><span class="etiqueta">Mira 4x</span><span class="valor" id="res_4x">—</span></div>
+      <button class="btn-copiar" onclick="copiarTodo()">📋 COPIAR TODO</button>
+    </div>
+  </div>
+
+  <!-- === PESTAÑA 2: BOTÓN DE DISPARO === -->
+  <div class="contenido-pestana" id="p_boton">
+    <div class="tarjeta">
+      <p class="tit-seccion">🔥 BOTÓN DE DISPARO</p>
+      <ul class="lista-consejos">
+        <li><span class="numero">1</span> <span class="dato">Tamaño ideal:</span> 48% – 55% (no muy grande, no muy pequeño)</li>
+        <li><span class="numero">2</span> <span class="dato">Posición:</span> Parte baja derecha, separado del borde al menos 1 dedo</li>
+        <li><span class="numero">3</span> <span class="dato">Altura:</span> A la altura de donde termina el pulgar al reposar</li>
+        <li><span class="numero">4</span> <span class="dato">Técnica:</span> Presiona y desliza rápido hacia arriba, no lo arrastres lento</li>
+        <li><span class="numero">5</span> <span class="dato">Doble toque:</span> Si falla, suelta y vuelve a presionar rápido</li>
+        <li><span class="numero">6</span> <span class="dato">No presiones fuerte:</span> Solo toque suave y rápido hacia arriba</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- === PESTAÑA 3: CONFIGURACIÓN DEL TELÉFONO === -->
+  <div class="contenido-pestana" id="p_config">
+    <div class="tarjeta">
+      <p class="tit-seccion">⚙️ AJUSTES DE TU TELÉFONO</p>
+      <ul class="lista-consejos">
+        <li><span class="numero">1</span> <span class="dato">Velocidad del puntero:</span> Al MÁXIMO (Ajustes → Accesibilidad)</li>
+        <li><span class="numero">2</span> <span class="dato">Sensibilidad táctil:</span> Activar "Mayor sensibilidad"</li>
+        <li><span class="numero">3</span> <span class="dato">Retraso al mantener pulsado:</span> En "Corto" o "Ninguno"</li>
+        <li><span class="numero">4</span> <span class="dato">Respuesta táctil:</span> Reducir tiempo de respuesta al mínimo</li>
+        <li><span class="numero">5</span> <span class="dato">Brillo:</span> Al menos 50% – 60% para mejor respuesta</li>
+        <li><span class="numero">6</span> <span class="dato">Limpiar pantalla:</span> Sin grasa ni suciedad → responde mejor</li>
+        <li><span class="numero">7</span> <span class="dato">Cargar RAM:</span> Cierra apps antes de jugar → más fluidez</li>
+        <li><span class="numero">8</span> <span class="dato">Modo rendimiento:</span> Activar si tu iPhone lo tiene</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- === PESTAÑA 4: CONSEJOS PARA SUBIR MIRA === -->
+  <div class="contenido-pestana" id="p_consejos">
+    <div class="tarjeta">
+      <p class="tit-seccion">💡 CÓMO SUBIR LA MIRA PERFECTO</p>
+      <ul class="lista-consejos">
+        <li><span class="numero">1</span> <span class="dato">Movimiento recto:</span> Desliza el dedo hacia arriba en línea recta, no en diagonal</li>
+        <li><span class="numero">2</span> <span class="dato">Velocidad:</span> Si la mira pasa la cabeza → más lento. Si se queda en el pecho → más rápido</li>
+        <li><span class="numero">3</span> <span class="dato">Distancia:</span> Enemigo lejos → movimiento corto. Enemigo cerca → movimiento largo</li>
+        <li><span class="numero">4</span> <span class="dato">No presiones fuerte:</span> Solo toque ligero, la fuerza no ayuda</li>
+        <li><span class="numero">5</span> <span class="dato">Practica en Entrenamiento:</span> 10 minutos diarios = resultado en 3 días</li>
+        <li><span class="numero">6</span> <span class="dato">Mira fija primero:</span> Aprende con mira fija antes que con movimiento</li>
+        <li><span class="numero">7</span> <span class="dato">Arma corta vs larga:</span> Escopetas y SMG → movimiento más rápido y corto. AR → suave y constante</li>
+        <li><span class="numero">8</span> <span class="dato">No deslices muy arriba:</span> Solo hasta donde termina la cabeza del enemigo y detente</li>
+      </ul>
+    </div>
+  </div>
+
 </div>
+
+<script>
+const datos = {
+  iphone_se:    {g:96, p:98, l:95, r:92, x2:88, x4:82},
+  iphone_11:   {g:98, p:99, l:97, r:94, x2:90, x4:84},
+  iphone_12:   {g:99, p:99, l:98, r:95, x2:92, x4:86},
+  iphone_13:   {g:100, p:100, l:99, r:97, x2:94, x4:88},
+  iphone_14:   {g:100, p:100, l:100, r:98, x2:96, x4:90},
+  iphone_15:   {g:100, p:100, l:100, r:99, x2:97, x4:92},
+  iphone_16:   {g:100, p:100, l:100, r:100, x2:98, x4:94}
+};
+
+function cambiarPestana(nombre){
+  document.querySelectorAll('.pestana').forEach(p=>p.classList.remove('activa'));
+  document.querySelectorAll('.contenido-pestana').forEach(c=>c.classList.remove('visible'));
+  event.target.classList.add('activa');
+  document.getElementById('p_' + nombre).classList.add('visible');
+}
+
+function generarSensi(){
+  const modelo = document.getElementById('modelo_ios').value;
+  if(!modelo){alert('⚠️ Elige tu modelo de iPhone primero');return;}
+  const s = datos[modelo];
+  document.getElementById('res_general').textContent = s.g;
+  document.getElementById('res_punto').textContent = s.p;
+  document.getElementById('res_linea').textContent = s.l;
+  document.getElementById('res_roja').textContent = s.r;
+  document.getElementById('res_2x').textContent = s.x2;
+  document.getElementById('res_4x').textContent = s.x4;
+  document.getElementById('caja_resultado').classList.add('mostrar');
+}
+
+function copiarTodo(){
+  const sel = document.getElementById('modelo_ios');
+  const modelo = sel.options[sel.selectedIndex].text;
+  const t = `⚔️ SENSIBILIDAD VIP EXCLUSIVA V1.2
+👑 manuelmods12
+
+📱 ${modelo}
+
+🎯 General: ${document.getElementById('res_general').textContent}
+🎯 Mira de Punto: ${document.getElementById('res_punto').textContent}
+🎯 Mira de Línea: ${document.getElementById('res_linea').textContent}
+🎯 Mira Roja: ${document.getElementById('res_roja').textContent}
+🎯 Mira 2x: ${document.getElementById('res_2x').textContent}
+🎯 Mira 4x: ${document.getElementById('res_4x').textContent}
+
+🔥 BOTÓN DE DISPARO:
+• Tamaño: 48% – 55%
+• Posición: Baja derecha, cómoda
+• Desliza recto hacia arriba rápido
+
+💡 CONSEJOS CLAVE:
+• Velocidad puntero al MÁXIMO
+• Si pasa la cabeza → desliza más lento
+• Si se queda en el pecho → desliza más rápido
+• Practica 10 min diarios en entrenamiento
+
+✅ Versión V1.2 — manuelmods12`;
+  navigator.clipboard.writeText(t).then(()=>alert('✅ ¡Copiado con éxito!'));
+}
+</script>
 </body>
 </html>
