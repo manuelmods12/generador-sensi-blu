@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝚂𝚎𝚗𝚜𝚒𝙿𝚛𝚘 • Generador Oficial</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+:root {
+  --oro: #ffd700;
+  --negro: #000;
+  --violeta: #a855f7;
+  --verde: #00ff88;
+  --rojo: #ff3333;
+}
+body {
+  background: #000;
+  min-height: 100vh;
+  padding: 20px 12px;
+}
+.contenedor {
+  max-width: 440px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #121212, #080808);
+  border-radius: 24px;
+  padding: 28px 20px;
+  border: 2px solid #2a2a2a;
+  box-shadow: 0 0 40px rgba(168,85,247,.15), inset 0 0 60px rgba(0,0,0,.6);
+}
+.cabecera {
+  text-align: center;
+  margin-bottom: 26px;
+}
+.cabecera h1 {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #ffd700, #fff, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.etiqueta-vip {
+  display: inline-block;
+  background: linear-gradient(90deg, #a855f7, #d8b4fe);
+  color: #000;
+  font-weight: 900;
+  padding: 5px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.etiqueta-act {
+  display: inline-block;
+  background: linear-gradient(90deg, #00ff88, #88ffbb);
+  color: #000;
+  font-weight: bold;
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  margin-left: 6px;
+}
+.escala-badge {
+  display: inline-block;
+  background: rgba(255,215,0,.1);
+  border: 1px solid rgba(255,215,0,.3);
+  color: #ffd700;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-top: 8px;
+}
+.pestañas {
+  display: flex; gap: 8px; margin: 22px 0;
+  background: #111; padding: 6px; border-radius: 14px;
+  border: 1px solid #2a2a2a;
+}
+.tab {
+  flex: 1; padding: 10px 6px; text-align: center; border-radius: 10px;
+  font-size: 12px; font-weight: 700; color: #888; cursor: pointer;
+  transition: .3s;
+}
+.tab.activa {
+  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  color: #fff;
+}
+.pagina { display: none; }
+.pagina.visible { display: block; animation: aparecer .4s ease; }
+@keyframes aparecer {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:none;}
+}
+label {
+  color: #ccc; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 1px; display: block; margin: 18px 0 8px;
+}
+select {
+  width: 100%; background: #111; border: 2px solid #333;
+  border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 15px;
+  outline: none; cursor: pointer;
+}
+select:focus { border-color: #a855f7; }
+.fila-opciones {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 6px;
+}
+.btn-opcion {
+  background: #111; border: 2px solid #2a2a2a; border-radius: 12px;
+  padding: 13px 8px; text-align: center; font-weight: 700;
+  font-size: 13px; color: #888; cursor: pointer; transition: .3s;
+}
+.btn-opcion.activo {
+  border-color: #a855f7; background: rgba(168,85,247,.1);
+  color: #d8b4fe;
+}
+.btn-generar {
+  width: 100%; background: linear-gradient(90deg, #a855f7, #7c3aed);
+  border: none; border-radius: 14px; padding: 18px;
+  color: #fff; font-weight: 900; font-size: 16px; cursor: pointer;
+  margin-top: 24px; transition: .2s;
+}
+.btn-generar:active { transform: scale(.97); }
+.caja-resultado {
+  background: #0f0f0f; border-radius: 16px; padding: 22px;
+  margin-top: 20px; border: 2px solid #222;
+}
+.caja-resultado h3 {
+  color: #ffd700; text-align: center; margin-bottom: 18px; font-size: 15px;
+}
+.fila-valor {
+  display: flex; justify-content: space-between; padding: 12px 0;
+  border-bottom: 1px solid #222;
+}
+.fila-valor:last-child { border-bottom: none; }
+.nombre { color: #999; font-size: 14px; }
+.valor {
+  color: #ffd700; font-weight: 800; font-size: 16px;
+}
+.btn-copiar {
+  width: 100%; margin-top: 20px;
+  background: linear-gradient(90deg, #00ff88, #00cc6a);
+  border: none; border-radius: 12px; padding: 14px;
+  color: #000; font-weight: 900; cursor: pointer;
+}
+.aviso {
+  background: rgba(255,215,0,.08); border-radius: 10px; padding: 12px;
+  margin-top: 18px; border: 1px solid rgba(255,215,0,.25);
+  font-size: 12px; color: #ffd700; text-align: center;
+}
+.pie {
+  text-align: center; margin-top: 25px; color: #333; font-size: 11px;
+}
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+  <div class="cabecera">
+    <h1>𝚂𝚎𝚗𝚜𝚒𝙿𝚛𝚘</h1>
+    <div>
+      <span class="etiqueta-vip">VIP • OFICIAL</span>
+      <span class="etiqueta-act">ACTUALIZADO ✅</span>
+    </div>
+    <div class="escala-badge" id="escala-texto">🔥 Free Fire • Escala 0–200</div>
+  </div>
+
+  <div class="pestañas">
+    <div class="tab activa" data-tab="config">⚙️ Config</div>
+    <div class="tab" data-tab="valores">🎯 Valores</div>
+    <div class="tab" data-tab="info">ℹ️ Info</div>
+  </div>
+
+  <!-- CONFIGURACIÓN -->
+  <div class="pagina visible" id="pag-config">
+    <label>🎮 Elige tu juego</label>
+    <div class="fila-opciones">
+      <div class="btn-opcion activo" data-juego="ff">🔥 Free Fire</div>
+      <div class="btn-opcion" data-juego="bs">🩸 Blood Strike</div>
+      <div class="btn-opcion" data-juego="cod">🎮 COD</div>
+      <div class="btn-opcion" data-juego="pubg">🔫 PUBG</div>
+    </div>
+
+    <label>📱 Tu celular</label>
+    <select id="dispositivo">
+      <option value="">Selecciona tu marca 👇</option>
+      <option value="android">📱 Android • Todos</option>
+      <option value="iphone">🍎 iPhone • Todos</option>
+    </select>
+
+    <label>🎯 Nivel de sensibilidad</label>
+    <div class="fila-opciones">
+      <div class="btn-opcion" data-nivel="baja">Baja</div>
+      <div class="btn-opcion activo" data-nivel="media">Media</div>
+      <div class="btn-opcion" data-nivel="alta">Alta</div>
+    </div>
+
+    <button class="btn-generar" id="btn-generar">⚡ GENERAR MI SENSI</button>
+  </div>
+
+  <!-- VALORES -->
+  <div class="pagina" id="pag-valores">
+    <div class="caja-resultado">
+      <h3>✨ TU SENSIBILIDAD</h3>
+      <div class="fila-valor"><span class="nombre">🎮 Juego</span><span class="valor" id="juego-nombre">—</span></div>
+      <div class="fila-valor"><span class="nombre">📱 Dispositivo</span><span class="valor" id="disp-nombre">—</span></div>
+      <div class="fila-valor"><span class="nombre">🔘 General</span><span class="valor" id="v-general">—</span></div>
+      <div class="fila-valor"><span class="nombre">🎯 Mira de Punto</span><span class="valor" id="v-punto">—</span></div>
+      <div class="fila-valor"><span class="nombre">🔭 Mira 2x</span><span class="valor" id="v-2x">—</span></div>
+      <div class="fila-valor"><span class="nombre">🔭 Mira 4x</span><span class="valor" id="v-4x">—</span></div>
+      <div class="fila-valor"><span class="nombre">🎯 Francotirador</span><span class="valor" id="v-sniper">—</span></div>
+      <div class="fila-valor"><span class="nombre">⚡ DPI Recomendado</span><span class="valor" id="v-dpi">—</span></div>
+      
+      <div class="aviso" id="aviso-escala">
+        📌 Escala: <strong>0 – 200</strong><br>
+        Ajusta de 2 a 5 puntos según tu estilo
+      </div>
+      
+      <button class="btn-copiar" id="btn-copiar">📋 COPIAR TODO</button>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="pagina" id="pag-info">
+    <div class="caja-resultado">
+      <h3>ℹ️ ESCALAS OFICIALES</h3>
+      <div style="color:#ccc; font-size:13px; line-height:2;">
+        <p>🔥 <strong>Free Fire:</strong> <span style="color:#ffd700;">0 – 200</span> ✅</p>
+        <p>🩸 <strong>Blood Strike:</strong> <span style="color:#a855f7;">0 – 500</span></p>
+        <p>🎮 <strong>COD Mobile:</strong> <span style="color:#00ff88;">0 – 100</span></p>
+        <p>🔫 <strong>PUBG:</strong> <span style="color:#ffd700;">0 – 300</span></p>
+        <br>
+        <p style="color:#a855f7;">💡 CONSEJOS:</p>
+        <p>• Nunca pases del límite de cada juego</p>
+        <p>• Si la mira sube mucho → baja 3 puntos</p>
+        <p>• Si se queda pegada al pecho → sube 3 puntos</p>
+        <p>• Practica 10 min antes de jugar partidas</p>
+        <p>• Sin root • Gratis • Seguro ✅</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pie">𝚂𝚎𝚗𝚜𝚒𝙿𝚛𝚘 • Generador Oficial © 2026</div>
+</div>
+
+<script>
+// ESTADO
+let juegoActivo = 'ff', nivelActivo = 'media', dispositivo = 'android';
+
+// LÍMITES POR JUEGO
+const limites = {
+  ff: {max:200, texto:'🔥 Free Fire • Escala 0–200'},
+  bs: {max:500, texto:'🩸 Blood Strike • Escala 0–500'},
+  cod: {max:100, texto:'🎮 COD • Escala 0–100'},
+  pubg: {max:300, texto:'🔫 PUBG • Escala 0–300'}
+};
+
+const nombresJuegos = {ff:'Free Fire', bs:'Blood Strike', cod:'COD Mobile', pubg:'PUBG'};
+
+// ACTUALIZAR ETIQUETA
+function actualizarEtiqueta() {
+  document.getElementById('escala-texto').textContent = limites[juegoActivo].texto;
+  document.getElementById('aviso-escala').innerHTML = `
+    📌 Escala: <strong>0 – ${limites[juegoActivo].max}</strong><br>
+    Ajusta de 2 a 5 puntos según tu estilo
+  `;
+}
+
+// PESTAÑAS
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('activa'));
+    tab.classList.add('activa');
+    const id = tab.dataset.tab;
+    document.querySelectorAll('.pagina').forEach(p => p.classList.remove('visible'));
+    document.getElementById(`pag-${id}`).classList.add('visible');
+  };
+});
+
+// SELECCIÓN DE JUEGO Y NIVEL
+document.querySelectorAll('.btn-opcion').forEach(boton => {
+  boton.onclick = () => {
+    const grupo = boton.parentElement;
+    grupo.querySelectorAll('.btn-opcion').forEach(b => b.classList.remove('activo'));
+    boton.classList.add('activo');
+    if (boton.dataset.juego) {
+      juegoActivo = boton.dataset.juego;
+      actualizarEtiqueta();
+    }
+    if (boton.dataset.nivel) nivelActivo = boton.dataset.nivel;
+  };
+});
+
+document.getElementById('dispositivo').onchange = e => {
+  dispositivo = e.target.value || 'android';
+};
+
+// VALORES BASE — FF MÁX 200 ✅
+const datos = {
+  ff: {
+    android: {
+      baja: {g:155, p:150, x2:135, x4:115, s:85, dpi:440},
+      media: {g:180, p:175, x2:160, x4:140, s:98, dpi:540},
+      alta: {g:200, p:195, x2:185, x4:165, s:115, dpi:720}
+    },
+    iphone: {
+      baja: {g:145, p:140, x2:125, x4:105, s:75, dpi:340},
+      media: {g:170, p:165, x2:150, x4:130, s:90, dpi:420},
+      alta: {g:195, p:188, x2:175, x4:155, s:110, dpi:550}
+    }
+  },
+  bs: {
+    android: {
+      baja: {g:180, p:170, x2:150, x4:130, s:100, dpi:420},
+      media: {g:300, p:290, x2:260, x4:230, s:180, dpi:580},
+      alta: {g:460, p:450, x2:410, x4:370, s:320, dpi:850}
+    },
+    iphone: {
+      baja: {g:160, p:155, x2:140, x4:120, s:90, dpi:320},
+      media: {g:280, p:270, x2:240, x4:210, s:160, dpi:450},
+      alta: {g:420, p:410, x2:380, x4:340, s:290, dpi:620}
+    }
+  },
+  cod: {
+    android: {
+      baja: {g:45, p:42, x2:38, x4:35, s:25, dpi:400},
+      media: {g:55, p:52, x2:48, x4:42, s:32, dpi:520},
+      alta: {g:70, p:65, x2:60, x4:52, s:45, dpi:680}
+    },
+    iphone: {
+      baja: {g:40, p:38, x2:35, x4:30, s:22, dpi:320},
+      media: {g:50, p:48, x2:44, x4:38, s:28, dpi:400},
+      alta: {g:65, p:60, x2:55, x4:48, s:40, dpi:520}
+    }
+  },
+  pubg: {
+    android: {
+      baja: {g:100, p:95, x2:88, x4:80, s:50, dpi:440},
+      media: {g:115, p:110, x2:102, x4:92, s:65, dpi:560},
+      alta: {g:130, p:125, x2:115, x4:105, s:85, dpi:750}
+    },
+    iphone: {
+      baja: {g:90, p:88, x2:80, x4:72, s:45, dpi:340},
+      media: {g:105, p:100, x2:92, x4:84, s:58, dpi:450},
+      alta: {g:120, p:115, x2:105, x4:95, s:75, dpi:600}
+    }
+  }
+};
+
+// LIMITAR VALORES
+function limitar(valor, juego) {
+  return Math.min(valor, limites[juego].max);
+}
+
+// GENERAR
+document.getElementById('btn-generar').onclick = () => {
+  if (!dispositivo) { alert('⚠️ Elige tu celular primero'); return; }
+  
+  const v = datos[juegoActivo][dispositivo][nivelActivo];
+  
+  document.getElementById('juego-nombre').textContent = nombresJuegos[juegoActivo];
+  document.getElementById('disp-nombre').textContent = dispositivo === 'android' ? '📱 Android' : '🍎 iPhone';
+  document.getElementById('v-general').textContent = limitar(v.g, juegoActivo);
+  document.getElementById('v-punto').textContent = limitar(v.p, juegoActivo);
+  document.getElementById('v-2x').textContent = limitar(v.x2, juegoActivo);
+  document.getElementById('v-4x').textContent = limitar(v.x4, juegoActivo);
+  document.getElementById('v-sniper').textContent = limitar(v.s, juegoActivo);
+  document.getElementById('v-dpi').textContent = v.dpi;
+  
+  document.querySelectorAll('.tab')[1].click();
+};
+
+// COPIAR
+document.getElementById('btn-copiar').onclick = () => {
+  const texto = `
+🎯 𝚂𝚎𝚗𝚜𝚒𝙿𝚛𝚘 • VIP OFICIAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎮 Juego: ${document.getElementById('juego-nombre').textContent}
+📱 Dispositivo: ${document.getElementById('disp-nombre').textContent}
+📏 Escala: 0 – ${limites[juegoActivo].max}
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔘 General:    ${document.getElementById('v-general').textContent}
+🎯 Mira Roja:  ${document.getElementById('v-punto').textContent}
+🔭 Mira 2x:    ${document.getElementById('v-2x').textContent}
+🔭 Mira 4x:    ${document.getElementById('v-4x').textContent}
+🎯 Francotirador: ${document.getElementById('v-sniper').textContent}
+⚡ DPI:        ${document.getElementById('v-dpi').textContent}
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Actualizado • Sin Root • Gratis
+🔗 Generado con SensiPro
+  `.trim();
+  
+  navigator.clipboard.writeText(texto).then(() => {
+    const btn = document.getElementById('btn-copiar');
+    btn.textContent = '✅ ¡COPIADO!';
+    setTimeout(() => btn.textContent = '📋 COPIAR TODO', 2500);
+  });
+};
+</script>
+</body>
+</html>
