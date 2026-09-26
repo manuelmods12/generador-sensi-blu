@@ -18,7 +18,6 @@ body{
 }
 .contenedor{max-width:480px;margin:0 auto}
 
-/* === PERFIL === */
 .perfil{
   text-align:center;
   margin-bottom:25px;
@@ -46,7 +45,6 @@ body{
 .subtitulo{color:#bbb;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
 .version{color:var(--dorado);font-size:14px;font-weight:bold}
 
-/* === PESTAÑAS === */
 .contenedor-pestanas{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px}
 .boton-pestana{
   padding:12px 8px;
@@ -70,7 +68,6 @@ body{
 .contenido-pestana.visible{display:block}
 @keyframes aparece{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* === TARJETAS === */
 .tarjeta{
   background:#1a1a1a;
   border:1px solid rgba(255,215,0,.18);
@@ -109,7 +106,6 @@ select{
 }
 select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)}
 
-/* === BOTONES === */
 .btn-generar{
   width:100%;
   padding:15px;
@@ -137,7 +133,6 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
   margin-top:15px
 }
 
-/* === FILAS DE RESULTADO === */
 .fila{
   display:flex;
   justify-content:space-between;
@@ -148,7 +143,6 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
 .etiqueta{font-weight:600;color:#ccc}
 .valor{font-weight:900;color:var(--dorado);font-size:18px;text-shadow:0 0 8px rgba(255,215,0,.3)}
 
-/* === LISTAS DE CONSEJOS === */
 .lista-consejos{list-style:none}
 .lista-consejos li{
   padding:12px 0;
@@ -172,20 +166,17 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
   flex-shrink:0
 }
 .dato{color:var(--dorado);font-weight:700}
-.subtitulo-dato{color:#aaa;font-size:13px;margin:8px 0 4px 0}
 </style>
 </head>
 <body>
 <div class="contenedor">
 
-  <!-- === PERFIL === -->
   <div class="perfil">
     <h1 class="nombre-perfil">MANUELMODS12</h1>
     <p class="subtitulo">GENERADOR DE SENSIBILIDAD VIP EXCLUSIVA</p>
     <p class="version">⚔️ VERSIÓN V1.4 — CON iPHONE XR ⚔️</p>
   </div>
 
-  <!-- === PESTAÑAS === -->
   <div class="contenedor-pestanas">
     <div class="boton-pestana activa" onclick="cambiarPestana('sensi')">🎯 SENSIBILIDAD</div>
     <div class="boton-pestana" onclick="cambiarPestana('boton')">🔥 BOTÓN DISPARO</div>
@@ -193,14 +184,8 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
     <div class="boton-pestana" onclick="cambiarPestana('mira')">💡 SUBIR MIRA</div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- === PESTAÑA 1: SENSIBILIDAD === -->
-  <!-- ============================================== -->
   <div class="contenido-pestana visible" id="p_sensi">
-    <div class="escala-nota">
-      ⚠️ NUEVA ESCALA 0–200 ✅ — iPhone XR incluido
-    </div>
-    
+    <div class="escala-nota">⚠️ NUEVA ESCALA 0–200 — iPhone XR incluido ✅</div>
     <div class="tarjeta">
       <p class="tit-seccion">📱 ELIGE TU DISPOSITIVO</p>
       <label>🍎 Modelo de iPhone:</label>
@@ -216,11 +201,7 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
         <option value="iphone_16">iPhone 16 / 16 Plus / 16 Pro / Pro Max</option>
       </select>
     </div>
-
-    <button class="btn-generar" onclick="generarSensi()">
-      ⚔️ GENERAR MI SENSIBILIDAD
-    </button>
-
+    <button class="btn-generar" onclick="generarSensi()">⚔️ GENERAR MI SENSIBILIDAD</button>
     <div class="tarjeta" id="caja_resultado" style="display:none">
       <p class="tit-seccion">✅ TU CONFIGURACIÓN LISTA</p>
       <div class="fila"><span class="etiqueta">🎯 General</span><span class="valor" id="res_general">—</span></div>
@@ -233,9 +214,6 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- === PESTAÑA 2: BOTÓN DE DISPARO === -->
-  <!-- ============================================== -->
   <div class="contenido-pestana" id="p_boton">
     <div class="tarjeta">
       <p class="tit-seccion">🔥 BOTÓN DE DISPARO</p>
@@ -252,9 +230,6 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- === PESTAÑA 3: TELÉFONO === -->
-  <!-- ============================================== -->
   <div class="contenido-pestana" id="p_telefono">
     <div class="tarjeta">
       <p class="tit-seccion">⚙️ AJUSTES DEL TELÉFONO</p>
@@ -271,15 +246,12 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
     </div>
   </div>
 
-  <!-- ============================================== -->
-  <!-- === PESTAÑA 4: SUBIR MIRA === -->
-  <!-- ============================================== -->
   <div class="contenido-pestana" id="p_mira">
     <div class="tarjeta">
       <p class="tit-seccion">💡 CÓMO SUBIR LA MIRA</p>
       <ul class="lista-consejos">
         <li><span class="numero">1</span><span class="dato">Movimiento recto:</span> Sube el dedo perfectamente recto hacia arriba</li>
-        <li><span class="numero">2</span><span class="dato">iPhone XR:</span> Pantalla 60Hz → desliza un poquito más rápido que en modelos nuevos</li>
+        <li><span class="numero">2</span><span class="dato">iPhone XR:</span> Pantalla 60Hz → desliza un poquito más rápido</li>
         <li><span class="numero">3</span><span class="dato">Pasa la cabeza?</span> Baja General de 5 en 5</li>
         <li><span class="numero">4</span><span class="dato">Se queda en el pecho?</span> Sube General de 5 en 5</li>
         <li><span class="numero">5</span><span class="dato">Enemigo cerca:</span> Movimiento corto y rápido</li>
@@ -293,9 +265,8 @@ select:focus{border-color:var(--dorado);box-shadow:0 0 0 3px rgba(255,215,0,.15)
 </div>
 
 <script>
-// VALORES ACTUALIZADOS — ESCALA 0-200 ✅
 const datos = {
-  iphone_xr:    {g:195, p:190, l:188, r:185, x2:175, x4:165}, // ⭐ NUEVO — iPhone XR
+  iphone_xr:    {g:195, p:190, l:188, r:185, x2:175, x4:165},
   iphone_se:    {g:175, p:170, l:165, r:160, x2:145, x4:125},
   iphone_11:   {g:180, p:175, l:170, r:165, x2:150, x4:130},
   iphone_12:   {g:185, p:180, l:175, r:170, x2:155, x4:135},
