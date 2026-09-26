@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GENERADOR GLOBAL v0.1 • iOS 🍎</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box; font-family:-apple-system, BlinkMacSystemFont, sans-serif;}
+:root {
+  --manzana: #00ffd5;
+  --fondo: #000;
+  --tarjeta: #0f0f0f;
+  --borde-ios: linear-gradient(135deg, #00ffd5, #00a3ff, #a855f7);
+}
+body {
+  background: radial-gradient(circle at top, #1a1a2e, #000 60%);
+  min-height: 100vh;
+  padding: 20px 12px;
+  color: #fff;
+}
+.contenedor {
+  max-width: 450px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #12121f, #0a0a12);
+  border-radius: 32px;
+  padding: 26px 20px;
+  border: 2px solid transparent;
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,255,213,.15), 0 0 80px rgba(0,163,255,.1);
+}
+.contenedor::before {
+  content: ''; position: absolute; inset: -2px; border-radius: 32px;
+  background: var(--borde-ios); z-index: -1;
+}
+.cabecera {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.cabecera h1 {
+  font-size: 24px; font-weight: 800;
+  background: linear-gradient(90deg, #00ffd5, #00a3ff, #a855f7);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+.cabecera .sub {
+  font-size: 13px; color: #777; margin-top: 4px;
+}
+.etiqueta-ver {
+  display: inline-block;
+  background: linear-gradient(90deg, #00ffd5, #00a3ff);
+  color: #000; font-weight: 900; padding: 6px 16px;
+  border-radius: 50px; font-size: 13px; margin-top: 10px;
+  box-shadow: 0 0 15px rgba(0,255,213,.4);
+}
+.etiqueta-so {
+  display: inline-block;
+  background: linear-gradient(90deg, #a855f7, #d8b4fe);
+  color: #fff; font-weight: bold; padding: 4px 12px;
+  border-radius: 50px; font-size: 12px; margin-left: 6px;
+}
+
+.pestañas {
+  display: flex; gap: 6px; margin-bottom: 20px;
+  background: rgba(255,255,255,.05); padding: 6px; border-radius: 14px;
+}
+.tab {
+  flex: 1; padding: 10px 6px; text-align: center; border-radius: 10px;
+  font-size: 12px; font-weight: 700; color: #777; cursor: pointer;
+  transition: .3s;
+}
+.tab.activa {
+  background: linear-gradient(135deg, #00ffd5, #00a3ff);
+  color: #000; box-shadow: 0 0 12px rgba(0,255,213,.4);
+}
+.pagina { display: none; }
+.pagina.visible { display: block; animation: aparecer .4s ease; }
+@keyframes aparecer {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:none;}
+}
+
+label {
+  color: #00ffd5; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 1px; display: block; margin: 18px 0 6px;
+}
+select {
+  width: 100%; background: rgba(255,255,255,.05);
+  border: 2px solid rgba(0,255,213,.2); border-radius: 12px;
+  padding: 14px 16px; color: #fff; font-size: 14px;
+  outline: none; cursor: pointer; transition: .3s;
+}
+select:focus { border-color: #00ffd5; box-shadow: 0 0 10px rgba(0,255,213,.2); }
+
+.fila-nivel {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 6px;
+}
+.btn-nivel {
+  background: rgba(255,255,255,.05); border: 2px solid transparent;
+  border-radius: 12px; padding: 13px 6px; text-align: center;
+  font-weight: 700; font-size: 13px; color: #888; cursor: pointer;
+  transition: .3s;
+}
+.btn-nivel.activo {
+  border-color: #00ffd5; background: rgba(0,255,213,.1);
+  color: #00ffd5; box-shadow: inset 0 0 10px rgba(0,255,213,.15);
+}
+
+.btn-avanzado {
+  width: 100%; background: rgba(168,85,247,.15);
+  border: 2px solid rgba(168,85,247,.3); border-radius: 12px;
+  padding: 15px; color: #d8b4fe; font-size: 14px;
+  margin: 20px 0 10px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: .3s;
+}
+.btn-avanzado.activo {
+  border-color: #d8b4fe; background: rgba(168,85,247,.3);
+  box-shadow: 0 0 15px rgba(168,85,247,.3);
+}
+
+.btn-generar {
+  width: 100%; background: linear-gradient(90deg, #00a3ff, #00ffd5);
+  border: none; border-radius: 14px; padding: 18px;
+  color: #000; font-weight: 900; font-size: 16px; cursor: pointer;
+  margin-top: 8px; transition: .2s;
+  box-shadow: 0 0 20px rgba(0,255,213,.35);
+}
+.btn-generar:active { transform: scale(.97); }
+
+.caja-resultado {
+  background: rgba(255,255,255,.03); border-radius: 16px; padding: 22px;
+  margin-top: 20px; border: 2px solid rgba(0,255,213,.2);
+}
+.caja-resultado h3 {
+  color: #00ffd5; text-align: center; margin-bottom: 18px; font-size: 15px;
+}
+.fila {
+  display: flex; justify-content: space-between; padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.fila:last-child { border-bottom: none; }
+.nombre { color: #aaa; font-size: 14px; }
+.valor {
+  color: #00ffd5; font-weight: 800; font-size: 16px;
+  text-shadow: 0 0 8px rgba(0,255,213,.4);
+}
+
+.caja-consejos {
+  background: rgba(255,255,255,.03); border-radius: 16px; padding: 22px;
+  border: 2px solid rgba(168,85,247,.2);
+}
+.caja-consejos h4 {
+  color: #a855f7; margin-bottom: 14px; font-size: 15px;
+  text-align: center;
+}
+.caja-consejos ul { list-style: none; }
+.caja-consejos li {
+  padding: 10px 0; border-bottom: 1px solid rgba(168,85,247,.1);
+  font-size: 13px; color: #ccc; line-height: 1.6;
+}
+.caja-consejos li:last-child { border-bottom: none; }
+
+.btn-copiar {
+  width: 100%; margin-top: 18px;
+  background: linear-gradient(90deg, #1f1f1f, #2f2f2f);
+  border: none; border-radius: 12px; padding: 13px;
+  color: #fff; font-weight: bold; cursor: pointer;
+}
+
+.pie {
+  text-align: center; margin-top: 25px; color: #444; font-size: 11px;
+}
+.oculto { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+  <div class="cabecera">
+    <h1>🍎 BLOOD STRIKE • iOS</h1>
+    <p class="sub">CONFIGURADOR DE SENSIBILIDAD • FLUIDEZ • CONSEJOS</p>
+    <div>
+      <span class="etiqueta-ver">GENERADOR GLOBAL v0.1</span>
+      <span class="etiqueta-so">SOLO iPHONE 🍎</span>
+    </div>
+  </div>
+
+  <div class="pestañas">
+    <div class="tab activa" data-tab="config">⚙️ Configuración</div>
+    <div class="tab" data-tab="valores">🎯 Valores</div>
+    <div class="tab" data-tab="consejos">💡 Consejos</div>
+  </div>
+
+  <!-- CONFIGURACIÓN -->
+  <div class="pagina visible" id="pag-config">
+    <label>📱 TU iPHONE</label>
+    <select id="modelo-ios">
+      <option value="">Selecciona tu modelo 👇</option>
+      <option value="iphone11">iPhone 11 / 11 Pro / 11 Pro Max</option>
+      <option value="iphonese">iPhone SE (2ª / 3ª Gen)</option>
+      <option value="iphone12">iPhone 12 / 12 Mini / 12 Pro / 12 Pro Max</option>
+      <option value="iphone13">iPhone 13 / 13 Mini / 13 Pro / 13 Pro Max</option>
+      <option value="iphone14">iPhone 14 / 14 Plus / 14 Pro / 14 Pro Max</option>
+      <option value="iphone15">iPhone 15 / 15 Plus / 15 Pro / 15 Pro Max</option>
+      <option value="iphone16">iPhone 16 / 16 Plus / 16 Pro / 16 Pro Max</option>
+    </select>
+
+    <label>🎯 NIVEL DE SENSIBILIDAD</label>
+    <div class="fila-nivel">
+      <div class="btn-nivel" data-nivel="baja">BAJA</div>
+      <div class="btn-nivel activo" data-nivel="media">MEDIA</div>
+      <div class="btn-nivel" data-nivel="alta">ALTA</div>
+    </div>
+
+    <label>⚙️ RENDIMIENTO / FLUIDEZ</label>
+    <div class="fila-nivel">
+      <div class="btn-nivel" data-fluidez="estable">ESTABLE</div>
+      <div class="btn-nivel activo" data-fluidez="equilibrado">EQUILIBRADO</div>
+      <div class="btn-nivel" data-fluidez="maxima">MÁXIMA</div>
+    </div>
+
+    <button class="btn-avanzado" id="btn-avanzado">
+      🧠 Activar Escaneo Avanzado
+    </button>
+
+    <button class="btn-generar" id="btn-generar">
+      ⚡ GENERAR CONFIGURACIÓN COMPLETA
+    </button>
+  </div>
+
+  <!-- VALORES -->
+  <div class="pagina oculto" id="pag-valores">
+    <div class="caja-resultado" id="caja-resultado">
+      <h3>✨ TUS VALORES • ESCALA 0–500</h3>
+      <div class="fila"><span class="nombre">📱 Dispositivo</span><span class="valor" id="disp-mostrado">—</span></div>
+      <div class="fila"><span class="nombre">🔘 Cámara General</span><span class="valor" id="v-camara">—</span></div>
+      <div class="fila"><span class="nombre">🎯 Mira Punto / Roja</span><span class="valor" id="v-punto">—</span></div>
+      <div class="fila"><span class="nombre">🔭 Mira 2x</span><span class="valor" id="v-2x">—</span></div>
+      <div class="fila"><span class="nombre">🔭 Mira 4x</span><span class="valor" id="v-4x">—</span></div>
+      <div class="fila"><span class="nombre">🎯 Mira 6x / Francotirador</span><span class="valor" id="v-6x">—</span></div>
+      <div class="fila"><span class="nombre">⚡ FPS Recomendado</span><span class="valor" id="v-fps">—</span></div>
+      <div class="fila"><span class="nombre">📊 Estilo Táctil</span><span class="valor" id="v-estilo">—</span></div>
+      <button class="btn-copiar" id="btn-copiar">📋 Copiar Toda la Configuración</button>
+    </div>
+    <p style="text-align:center; color:#666; margin-top:15px; font-size:12px;">💡 Ve a "Consejos" para mejorar tu juego</p>
+  </div>
+
+  <!-- CONSEJOS -->
+  <div class="pagina oculto" id="pag-consejos">
+    <div class="caja-consejos">
+      <h4>🍎 CONSEJOS EXCLUSIVOS PARA iPHONE</h4>
+      <ul id="lista-consejos">
+        <li style="text-align:center; color:#666;">Primero genera tu configuración ✨</li>
+      </ul>
+      <div style="margin-top:20px; padding:15px; background:rgba(255,255,255,.03); border-radius:12px; border:1px solid rgba(0,255,213,.
