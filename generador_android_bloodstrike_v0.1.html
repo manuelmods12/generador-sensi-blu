@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GENERADOR GLOBAL v0.1 • ANDROID 🔥</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+:root {
+  --oro: #ffd700;
+  --fuego: #ff2a2a;
+  --rojo: #c00;
+  --neon: #00ffcc;
+  --fondo: #050008;
+  --tarjeta: #12051a;
+  --borde: linear-gradient(135deg, #ffd700, #ff2a2a, #9c27b0);
+}
+body {
+  background: radial-gradient(circle at top, #2a0040, #050008 60%);
+  min-height: 100vh;
+  padding: 20px 12px;
+  color: #fff;
+}
+.contenedor {
+  max-width: 450px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #1a0528, #0f0518);
+  border-radius: 28px;
+  padding: 26px 20px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 30px rgba(255,42,42,.2), 0 0 60px rgba(156,39,176,.1);
+  position: relative; overflow: hidden;
+}
+.contenedor::before {
+  content: ''; position: absolute; inset: -2px; border-radius: 28px;
+  background: var(--borde); z-index: -1;
+}
+.cabecera {
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative; z-index: 1;
+}
+.cabecera h1 {
+  font-size: 24px; font-weight: 900;
+  background: linear-gradient(90deg, #ffd700, #ff6600, #ff2a2a);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+}
+.cabecera .sub {
+  font-size: 13px; color: #999; margin-top: 4px;
+}
+.etiqueta-ver {
+  display: inline-block;
+  background: linear-gradient(90deg, #ffd700, #ff6600);
+  color: #000; font-weight: 900; padding: 6px 16px;
+  border-radius: 50px; font-size: 13px; margin-top: 10px;
+  box-shadow: 0 0 15px rgba(255,215,0,.4);
+}
+.etiqueta-so {
+  display: inline-block;
+  background: linear-gradient(90deg, #00c853, #00e676);
+  color: #000; font-weight: bold; padding: 4px 12px;
+  border-radius: 50px; font-size: 12px; margin-left: 6px;
+}
+
+/* PESTAÑAS */
+.pestañas {
+  display: flex; gap: 6px; margin-bottom: 20px;
+  background: rgba(0,0,0,.4); padding: 6px; border-radius: 14px;
+  border: 1px solid rgba(255,215,0,.2);
+}
+.tab {
+  flex: 1; padding: 10px 6px; text-align: center; border-radius: 10px;
+  font-size: 12px; font-weight: 700; color: #888; cursor: pointer;
+  transition: .3s;
+}
+.tab.activa {
+  background: linear-gradient(135deg, #ffd700, #ff2a2a);
+  color: #000; box-shadow: 0 0 12px rgba(255,42,42,.4);
+}
+.pagina { display: none; }
+.pagina.visible { display: block; animation: aparecer .4s ease; }
+@keyframes aparecer {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:none;}
+}
+
+label {
+  color: #ffd700; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 1px; display: block; margin: 18px 0 6px;
+}
+select {
+  width: 100%; background: rgba(255,255,255,.05);
+  border: 2px solid rgba(255,215,0,.2); border-radius: 12px;
+  padding: 14px 16px; color: #fff; font-size: 14px;
+  outline: none; cursor: pointer; transition: .3s;
+}
+select:focus { border-color: #ffd700; box-shadow: 0 0 10px rgba(255,215,0,.2); }
+
+.fila-nivel {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 6px;
+}
+.btn-nivel {
+  background: rgba(255,255,255,.05); border: 2px solid transparent;
+  border-radius: 12px; padding: 13px 6px; text-align: center;
+  font-weight: 700; font-size: 13px; color: #888; cursor: pointer;
+  transition: .3s;
+}
+.btn-nivel.activo {
+  border-color: #ff2a2a; background: rgba(255,42,42,.15);
+  color: #ff8888; box-shadow: inset 0 0 10px rgba(255,42,42,.2);
+}
+
+.btn-avanzado {
+  width: 100%; background: rgba(156,39,176,.15);
+  border: 2px solid rgba(156,39,176,.3); border-radius: 12px;
+  padding: 15px; color: #d8b4e2; font-size: 14px;
+  margin: 20px 0 10px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: .3s;
+}
+.btn-avanzado.activo {
+  border-color: #cc00ff; background: rgba(156,39,176,.3);
+  box-shadow: 0 0 15px rgba(204,0,255,.3);
+}
+
+.btn-generar {
+  width: 100%; background: linear-gradient(90deg, #d4af00, #ff2a2a);
+  border: none; border-radius: 14px; padding: 18px;
+  color: #000; font-weight: 900; font-size: 16px; cursor: pointer;
+  margin-top: 10px; transition: .2s;
+  box-shadow: 0 0 20px rgba(255,42,42,.35);
+}
+.btn-generar:active { transform: scale(.97); }
+
+.caja-resultado {
+  background: rgba(0,0,0,.35); border-radius: 16px; padding: 22px;
+  margin-top: 20px; border: 2px solid rgba(255,215,0,.2);
+}
+.caja-resultado h3 {
+  color: #ffd700; text-align: center; margin-bottom: 18px; font-size: 15px;
+}
+.fila {
+  display: flex; justify-content: space-between; padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.fila:last-child { border-bottom: none; }
+.nombre { color: #aaa; font-size: 14px; }
+.valor {
+  color: #ffd700; font-weight: 800; font-size: 16px;
+  text-shadow: 0 0 8px rgba(255,215,0,.4);
+}
+
+.caja-consejos {
+  background: rgba(0,0,0,.35); border-radius: 16px; padding: 22px;
+  border: 2px solid rgba(0,255,204,.2);
+}
+.caja-consejos h4 {
+  color: #00ffcc; margin-bottom: 14px; font-size: 15px;
+  text-align: center;
+}
+.caja-consejos ul { list-style: none; }
+.caja-consejos li {
+  padding: 10px 0; border-bottom: 1px solid rgba(0,255,204,.1);
+  font-size: 13px; color: #ccc; line-height: 1.6;
+}
+.caja-consejos li:last-child { border-bottom: none; }
+
+.btn-copiar {
+  width: 100%; margin-top: 18px;
+  background: linear-gradient(90deg, #2a2a2a, #3a3a3a);
+  border: none; border-radius: 12px; padding: 13px;
+  color: #fff; font-weight: bold; cursor: pointer;
+  transition: .2s;
+}
+.btn-copiar:hover { background: linear-gradient(90deg, #3a3a3a, #4a4a4a); }
+
+.pie {
+  text-align: center; margin-top: 25px; color: #555; font-size: 11px;
+}
+.oculto { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+  <div class="cabecera">
+    <h1>🩸 BLOOD STRIKE</h1>
+    <p class="sub">CONFIGURADOR DE SENSIBILIDAD • FLUIDEZ • CONSEJOS</p>
+    <div>
+      <span class="etiqueta-ver">GENERADOR GLOBAL v0.1</span>
+      <span class="etiqueta-so">ANDROID 📱</span>
+    </div>
+  </div>
+
+  <!-- PESTAÑAS -->
+  <div class="pestañas">
+    <div class="tab activa" data-tab="config">⚙️ Configuración</div>
+    <div class="tab" data-tab="valores">🎯 Valores</div>
+    <div class="tab" data-tab="consejos">💡 Consejos</div>
+  </div>
+
+  <!-- PÁGINA 1: CONFIGURACIÓN -->
+  <div class="pagina visible" id="pag-config">
+    <label>🏷️ MARCA</label>
+    <select id="marca">
+      <option value="">Selecciona tu marca 👇</option>
+      <option value="samsung">📱 SAMSUNG</option>
+      <option value="xiaomi">📱 XIAOMI / REDMI</option>
+      <option value="realme">📱 REALME</option>
+      <option value="oppo">📱 OPPO</option>
+      <option value="vivo">📱 VIVO</option>
+      <option value="motorola">📱 MOTOROLA</option>
+      <option value="huawei">📱 HUAWEI / HONOR</option>
+    </select>
+
+    <label>📋 MODELO</label>
+    <select id="modelo">
+      <option value="">Primero elige la marca ☝️</option>
+    </select>
+
+    <label>🎯 NIVEL DE SENSIBILIDAD</label>
+    <div class="fila-nivel">
+      <div class="btn-nivel" data-nivel="baja">BAJA</div>
+      <div class="btn-nivel activo" data-nivel="media">MEDIA</div>
+      <div class="btn-nivel" data-nivel="alta">ALTA</div>
+    </div>
+
+    <label>⚙️ RENDIMIENTO / FLUIDEZ</label>
+    <div class="fila-nivel">
+      <div class="btn-nivel" data-fluidez="estable">ESTABLE</div>
+      <div class="btn-nivel activo" data-fluidez="equilibrado">EQUILIBRADO</div>
+      <div class="btn-nivel" data-fluidez="maxima">MÁXIMA</div>
+    </div>
+
+    <button class="btn-avanzado" id="btn-avanzado">
+      🧠 Activar Escaneo Avanzado
+    </button>
+
+    <button class="btn-generar" id="btn-generar">
+      ⚡ GENERAR CONFIGURACIÓN COMPLETA
+    </button>
+  </div>
+
+  <!-- PÁGINA 2: VALORES -->
+  <div class="pagina oculto" id="pag-valores">
+    <div class="caja-resultado" id="caja-resultado">
+      <h3>✨ TUS VALORES • ESCALA 0–500</h3>
+      <div class="fila"><span class="nombre">📱 Dispositivo</span><span class="valor" id="disp-mostrado">—</span></div>
+      <div class="fila"><span class="nombre">🔘 Cámara General</span><span class="valor" id="v-camara">—</span></div>
+      <div class="fila"><span class="nombre">🎯 Mira Punto / Roja</span><span class="valor" id="v-punto">—</span></div>
+      <div class="fila"><span class="nombre">🔭 Mira 2x</span><span class="valor" id="v-2x">—</span></div>
+      <div class="fila"><span class="nombre">🔭 Mira 4x</span><span class="valor" id="v-4x">—</span></div>
+      <div class="fila"><span class="nombre">🎯 Mira 6x / Francotirador</span><span class="valor" id="v-6x">—</span></div>
+      <div class="fila"><span class="nombre">⚡ FPS Recomendado</span><span class="valor" id="v-fps">—</span></div>
+      <div class="fila"><span class="nombre">🔧 DPI Recomendado</span><span class="valor" id="v-dpi">—</span></div>
+      <button class="btn-copiar" id="btn-copiar">📋 Copiar Toda la Configuración</button>
+    </div>
+    <p style="text-align:center; color:#666; margin-top:15px; font-size:12px;">💡 Ve a "Consejos" para mejorar tu juego</p>
+  </div>
+
+  <!-- PÁGINA 3: CONSEJOS -->
+  <div class="pagina oculto" id="pag-consejos">
+    <div class="caja-consejos">
+      <h4>🧠 CONSEJOS PARA MEJORAR</h4>
+      <ul id="lista-consejos">
+        <li style="text-align:center; color:#666;">Primero genera tu configuración en la pestaña Configuración ✨</li>
+      </ul>
+      <div style="margin-top:20px; padding:15px; background:rgba(0,0,0,.3); border-radius:12px; border:1px solid rgba(255,215,0,.2);">
+        <h4 style="color:#ffd700; margin-bottom:10px;">📌 REGLAS DE ORO</h4>
+        <ul style="list-style:none; font-size:13px; color:#bbb; line-height:1.8;">
+          <li>✅ Ajusta de 5 en 5 puntos, nunca de golpe</li>
+          <li>✅ Estabilidad > Velocidad: 60 FPS fijos > 120 con tirones</li>
+          <li>✅ Desactiva "Sincronización global" → personaliza cada mira</li>
+          <li>✅ Cierra apps antes de jugar → más memoria = más fluidez 🚀</li>
+          <li>✅ Practica 10 min diarios en Entrenamiento = progreso real</li>
+          <li>❌ No copies la sensi de otros → tu mano y pantalla son únicas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pie">GENERADOR GLOBAL v0.1 • ANDROID • Hasta 500</div>
+</div>
+
+<script>
+// ==============================================
+// DATOS
+// ==============================================
+const modelos = {
+  samsung: [
+    "Galaxy A04 / A05", "Galaxy A13 / A14 / A15", "Galaxy A23 / A24 / A25",
+    "Galaxy A33 5G / A34 5G / A35 5G", "Galaxy A52 / A53 / A54 / A55",
+    "Galaxy S21 / S22 / S23 / S24", "Galaxy S23 Ultra / S24 Ultra", "Galaxy M14 / M34"
+  ],
+  xiaomi: [
+    "Redmi 9 / 9A / 9C / 10A / 12C", "Redmi 10 / 12 / 13",
+    "Redmi Note 11 / 12 / 13", "Note 12 Pro / Note 13 Pro",
+    "POCO X3 / X5 / X6 / X6 Pro", "POCO F4 / F5 / F6", "Mi 12 / 13 / 14"
+  ],
+  realme: [
+    "C11 / C30 / C33 / C51 / C53 / C55", "Narzo 50 / 60",
+    "Note 60 / 70", "10 Pro / 11 Pro / 12 Pro", "GT Neo 3 / 5 / 6"
+  ],
+  oppo: [
+    "A15 / A17 / A18 / A38", "A53 / A54 / A57 / A58 / A60",
+    "A94 / A96 / A98", "Reno 8 / 9 / 10 / 11 / 12", "Find X5 / X6 / X7"
+  ],
+  vivo: [
+    "Y16 / Y20 / Y21 / Y22 / Y27 / Y36", "Y55 / Y76 / Y78",
+    "V25 / V27 / V29 / V40", "X80 / X90 / X100"
+  ],
+  motorola: [
+    "E13 / E22 / E32", "G22 / G32 / G52 / G53 / G54 / G84",
+    "Edge 40 / 50 / Pro / Ultra"
+  ],
+  huawei: [
+    "Y6p / Y7a / Y9a", "Nova 9 / 10 / 11 / 12", "P40 / P50 / P60",
+    "Mate 50 / 60", "Honor X8 / X9 / Magic 5 / 6"
+  ]
+};
+
+const datos = {
+  baja: {
+    gama_baja: {cam:180, punto:170, x2:150, x4:130, x6:100, fps:45, dpi:420},
+    gama_media: {cam:220, punto:210, x2:190, x4:160, x6:130, fps:60, dpi:500},
+    gama_alta: {cam:280, punto:270, x2:240, x4:210, x6:170, fps:90, dpi:600},
+    gama_premium: {cam:320, punto:310, x2:280, x4:250, x6:200, fps:120, dpi:700}
+  },
+  media: {
+    gama_baja: {cam:250, punto:240, x2:210, x4:180, x6:140, fps:45, dpi:500},
+    gama_media: {cam:300, punto:290, x2:260, x4:230, x6:180, fps:60, dpi:600},
+    gama_alta: {cam:380, punto:370, x2:340, x4:300, x6:250, fps:90, dpi:750},
+    gama_premium: {cam:420, punto:410, x2:380, x4:340, x6:290, fps:120, dpi:850}
+  },
+  alta: {
+    gama_baja: {cam:350, punto:340, x2:300, x4:260, x6:210, fps:45, dpi:600},
+    gama_media: {cam:400, punto:390, x2:350, x4:310, x6:250, fps:60, dpi:720},
+    gama_alta: {cam:460, punto:450, x2:410, x4:370, x6:320, fps:90, dpi:850},
+    gama_premium: {cam:500, punto:490, x2:460, x4:420, x6:370, fps:120, dpi:960}
+  }
+};
+
+const consejos = {
+  baja: [
+    "📱 Gama Baja: Gráficos SUAVES, FPS 45–60 estables",
+    "🎯 Sube la sensi de 5 en 5, no de golpe",
+    "🔘 Mira siempre a la altura del pecho/cabeza",
+    "🔥 10 min en entrenamiento cada día = progreso real",
+    "⚠️ Si se traba → baja DPI y cierra apps antes de jugar"
+  ],
+  media: [
+    "📱 Gama Media: FPS 60 = fluidez perfecta para reaccionar",
+    "🎯 Cámara 10–15 puntos más alta que mira 2x",
+    "✋ Arrastra sin levantar el dedo de la pantalla",
+    "🔴 Mira roja = valor cercano a tu cámara",
+    "💪 Tu sensi es única: no copies a nadie, ajústala tú"
+  ],
+  alta: [
+    "📱 Gama Alta: Aprovecha 90–120 FPS → tu reacción llega primero 🚀",
+    "🎯 Valores altos (350–500) funcionan porque tu pantalla responde rápido",
+    "🧠 Desactiva 'Sincronización global' → personaliza cada mira",
+    "🔭 Mira 6x más baja que el resto = control total a larga distancia",
+    "🔥 Aceleración FIJA = memoria muscular, mucho mejor que automática"
+  ]
+};
+
+// ==============================================
+// PESTAÑAS
+// ==============================================
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('activa'));
+    tab.classList.add('activa');
+    const id = tab.dataset.tab;
+    document.querySelectorAll('.pagina').forEach(p => p.classList.add('oculto', 'visible'));
+    document.getElementById(`pag-${id}`).classList.remove('oculto');
+  };
+});
+
+// ==============================================
+// CARGAR MODELOS
+// ==============================================
+const selMarca = document.getElementById('marca');
+const selModelo = document.getElementById('modelo');
+selMarca.onchange = () => {
+  selModelo.innerHTML = `<option value="">Selecciona tu modelo 👇</option>`;
+  if (modelos[selMarca.value]) {
+    modelos[selMarca.value].forEach(m => {
+      const op = document.createElement('option');
+      op.value = m; op.textContent = m; selModelo.appendChild(op);
+    });
+  }
+};
+
+// ==============================================
+// ESTADO
+// ==============================================
+let nivelSensi = 'media', nivelFluidez = 'equilibrado', escaneoActivo = false;
+document.querySelectorAll('[data-nivel]').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('[data-nivel]').forEach(x => x.classList.remove('activo'));
+    b.classList.add('activo'); nivelSensi = b.dataset.nivel;
+  };
+});
+document.querySelectorAll('[data-fluidez]').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('[data-fluidez]').forEach(x => x.classList.remove('activo'));
+    b.classList.add('activo'); nivelFluidez = b.dataset.fluidez;
+  };
+});
+document.getElementById('btn-avanzado').onclick = () => {
+  escaneoActivo = !escaneoActivo;
+  document.getElementById('btn-avanzado').classList.toggle('activo');
+  document.getElementById('btn-avanzado').textContent = escaneoActivo ? '✅ Escaneo Avanzado ACTIVO' : '🧠 Activar Escaneo Avanzado';
+};
+
+// ==============================================
+// GENERAR
+// ==============================================
+document.getElementById('btn-generar').onclick = () => {
+  const marca = selMarca.value, modelo = selModelo.value;
+  if (!marca || !modelo) { alert('⚠️ Elige marca Y modelo'); return; }
+
+  let gama = 'gama_media';
+  const baja = ["A04","A05","A13","A14","A15","9A","9C","C11","C30","A15","A17","Y16","E13","E22"];
+  const alta = ["A53","A54","A55","S23","S24","Note 12 Pro","Note 13 Pro","X5","X6","F5","F6","GT Neo","Reno 10","V29","X90","Edge 50","Nova 11","P60","Mate 60"];
+  const premium = ["S23 Ultra","S24 Ultra","X6 Pro","Find X6","V40","X100","Mate 60 Pro","Magic 6"];
+  if (premium.some(p => modelo.includes(p))) gama = 'gama_premium';
+  else if (alta.some(p => modelo.includes(p))) gama = 'gama_alta';
+  else if (baja.some(p => modelo.includes(p))) gama = 'gama_baja';
+
+  let cfg = {...datos[nivelSensi][gama]};
+
+  if (nivelFluidez === 'estable') {
+    cfg.cam = Math.max(100, cfg.cam - 40);
+    cfg.punto = Math.max(100, cfg.punto - 40);
+    cfg.x2 = Math.max(80, cfg.x2 - 30);
+    cfg.x4 = Math.max(70, cfg.x4 - 30);
+    cfg.x6 = Math.max(50, cfg.x6 - 20);
+    cfg.dpi = Math.max(400, cfg.dpi - 80);
+    cfg.fps = Math.min(cfg.fps, 60);
+  } else if (nivelFluidez === 'maxima') {
+    cfg.cam = Math.min(500, cfg.cam + 50);
+    cfg.punto = Math.min(500, cfg.punto + 50);
+    cfg.x2 = Math.min(500, cfg.x2 + 45);
+    cfg.x4 = Math.min(500, cfg.x4 + 45);
+    cfg.x6 = Math.min(500, cfg.x6 + 40);
+    cfg.dpi += 100;
+  }
+
+  if (escaneoActivo) {
+    cfg.cam = Math.min(500, cfg.cam + 30);
+    cfg.punto = Math.min(500, cfg.punto + 30);
+    cfg.x2 = Math.min(500, cfg.x2 + 25);
+    cfg.x4 = Math.min(500, cfg.x4 + 25);
+    cfg.x6 = Math.min(500, cfg.x6 + 20);
+    cfg.dpi += 60;
+  }
+
+  document.getElementById('disp-mostrado').textContent = modelo;
+  document.getElementById('v-camara').textContent = cfg.cam;
+  document.getElementById('v-punto').textContent = cfg.punto;
+  document.getElementById('v-2x').textContent = cfg.x2;
+  document.getElementById('v-4x').textContent = cfg.x4;
+  document.getElementById('v-6x').textContent = cfg.x6;
+  document.getElementById('v-fps').textContent = cfg.fps + ' FPS';
+  document.getElementById('v-dpi').textContent = cfg.dpi;
+
+  const nivelConsejo = gama === 'gama_baja' ? 'baja' : gama === 'gama_alta' || gama === 'gama_premium' ? 'alta' : 'media';
+  const lista = document.getElementById('lista-consejos');
+  lista.innerHTML = '';
+  consejos[nivelConsejo].forEach(t => { const li = document.createElement('li'); li.textContent = t; lista.appendChild(li); });
+
+  document.querySelectorAll('.tab')[1].click(); // Ir a pestaña Valores
+};
+
+// ==============================================
+// COPIAR
+// ==============================================
+document.getElementById('btn-copiar').onclick = () => {
+  const texto = `
+🩸 GENERADOR GLOBAL v0.1 • ANDROID
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 Dispositivo: ${selMarca.options[selMarca.selectedIndex].textContent} • ${selModelo.value}
+🎯 Sensibilidad: ${nivelSensi.toUpperCase()}
+⚙️ Fluidez: ${nivelFluidez.toUpperCase()}
+🧠 Escaneo Avanzado: ${escaneoActivo ? 'SI ✅' : 'NO ❌'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔘 Cámara:     ${document.getElementById('v-camara').textContent}
+🎯 Mira Roja:  ${document.getElementById('v-punto').textContent}
+🔭 Mira 2x:    ${document.getElementById('v-2x').textContent}
+🔭 Mira 4x:    ${document.getElementById('v-4x').textContent}
+🎯 Mira 6x:    ${document.getElementById('v-6x').textContent}
+⚡ FPS:        ${document.getElementById('v-fps').textContent}
+🔧 DPI:        ${document.getElementById('v-dpi').textContent}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 Escala 0–500 • Ajusta de 5 en 5
+  `.trim();
+  navigator.clipboard.writeText(texto).then(() => {
+    document.getElementById('btn-copiar').textContent = '✅ ¡Copiado!';
+    setTimeout(() => document.getElementById('btn-copiar').textContent = '📋 Copiar Todo', 2500);
+  });
+};
+</script>
+</body>
+</html>
