@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Sensy Modificada 👹</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+:root{
+  --f0:#000; --f1:#0a0000; --f2:#1a0202;
+  --r:#ff0033; --r2:#ff4d6d; --n:#ff8800; --d:#ffcc00;
+  --m:#bb00ff; --borde:#ff2222; --t:#fff;
+  --sombra:0 0 25px rgba(255,0,50,.5);
+  --sombraF:0 0 45px rgba(255,0,50,.8);
+}
+
+body{
+  background:linear-gradient(180deg,#000,#110000,#000);
+  color:var(--t);min-height:100vh;
+}
+
+/* === PORTADA === */
+.portada{
+  height:40vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;position:relative;overflow:hidden;
+  border-bottom:2px solid var(--r);box-shadow:var(--sombraF);
+}
+.fondo-ico{
+  position:absolute;font-size:10rem;opacity:.15;filter:blur(2px);
+  animation:respirar 2.5s ease-in-out infinite alternate;
+}
+@keyframes respirar{
+  from{transform:scale(1);}to{transform:scale(1.15);}
+}
+.tit{
+  font-size:2.7rem;font-weight:900;letter-spacing:4px;
+  background:linear-gradient(180deg,#fff,#ff6666,var(--r),var(--n));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 40px rgba(255,0,50,.6);z-index:2;
+  animation:brillo 2s ease-in-out infinite alternate;
+}
+@keyframes brillo{
+  from{filter:brightness(1);}to{filter:brightness(1.3);}
+}
+.sub{color:#ff8888;font-size:.9rem;margin-top:8px;letter-spacing:3px;text-transform:uppercase;}
+.etiq200{
+  margin-top:12px;padding:7px 26px;
+  background:linear-gradient(90deg,var(--r),var(--n),var(--r));
+  background-size:200% 100%;border-radius:30px;font-weight:bold;font-size:.85rem;
+  animation:etqBrillo 1.5s linear infinite;
+}
+@keyframes etqBrillo{
+  0%{background-position:0% 0%;}100%{background-position:200% 0%;}
+}
+
+.cont{padding:20px;max-width:520px;margin:0 auto;padding-bottom:60px;}
+
+.caja{
+  background:linear-gradient(135deg,#1a0505,#110000);
+  border:1px solid var(--borde);border-radius:16px;padding:20px;margin-bottom:18px;
+  box-shadow:var(--sombra);transition:transform .2s;
+}
+.caja:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(255,0,50,.6);}
+.ctit{font-size:1.1rem;font-weight:bold;color:var(--r);margin-bottom:12px;display:flex;gap:8px;}
+.cdesc{font-size:.85rem;color:#aaa;margin-bottom:12px;line-height:1.5;}
+
+select,button{
+  width:100%;padding:13px;background:#0a0a0a;border:1px solid var(--r);
+  color:#fff;border-radius:10px;font-size:.95rem;margin-bottom:12px;outline:none;
+}
+select:focus{border-color:var(--d);box-shadow:0 0 15px rgba(255,200,0,.5);}
+
+.btn-gen{
+  background:linear-gradient(90deg,var(--r),var(--n),var(--r));
+  background-size:200% 100%;border:none;font-weight:bold;font-size:1.15rem;
+  padding:15px;cursor:pointer;box-shadow:0 0 25px rgba(255,0,50,.6);
+  transition:all .3s;margin-top:8px;animation:btnBrillo 2s linear infinite;
+}
+@keyframes btnBrillo{
+  0%{background-position:0% 0%;}100%{background-position:200% 0%;}
+}
+.btn-gen:hover{transform:scale(1.05);box-shadow:0 0 45px rgba(255,0,50,.9);}
+
+.res{
+  margin-top:18px;padding:18px;background:rgba(0,0,0,.75);border-radius:12px;
+  border-left:4px solid var(--d);display:none;box-shadow:var(--sombra);
+}
+.res.act{display:block;animation:aparecer .4s ease-out;}
+@keyframes aparecer{
+  from{opacity:0;transform:translateY(15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.fila{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #222;}
+.fila:last-child{border-bottom:none;}
+.et{color:#aaa;font-size:.9rem;}
+.val{color:var(--d);font-weight:bold;font-size:.95rem;}
+.stit{color:var(--n);font-weight:bold;margin:16px 0 10px 0;font-size:1rem;}
+
+.pest{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.pt{
+  flex:1;min-width:85px;padding:11px;background:#111;border:1px solid #333;
+  color:#888;border-radius:10px;text-align:center;cursor:pointer;font-size:.8rem;
+  transition:all .2s;
+}
+.pt.act{border-color:var(--r);color:#fff;background:rgba(255,0,50,.15);box-shadow:0 0 15px rgba(255,0,50,.4);}
+.pc{display:none;}
+.pc.act{display:block;animation:aparecer .3s ease-out;}
+
+.nota{font-size:.75rem;color:#666;margin-top:12px;line-height:1.5;}
+.ok200{color:#0f0;font-size:.8rem;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <span class="fondo-ico">👹</span>
+  <h1 class="tit">Sensy Modificada</h1>
+  <p class="sub">GENERADOR • FREE FIRE • ANDROID</p>
+  <div class="etiq200">✅ TODOS LOS VALORES: 0 — 200</div>
+</div>
+
+<div class="cont">
+
+<!-- SELECCIÓN COMPLETA -->
+<div class="caja">
+  <p class="ctit">📱 Elige tu Dispositivo — TODO SEPARADO</p>
+  <p class="cdesc">Marca → Modelo → Número exacto. Cada uno aparte para NO confundirse.</p>
+
+  <select id="marca" onchange="cargarModelos()">
+    <option value="">-- 1️⃣ Elige MARCA --</option>
+    <option value="samsung">🔵 Samsung</option>
+    <option value="blu">🔵 BLU</option>
+    <option value="xiaomi">🔴 Xiaomi / Redmi / POCO</option>
+    <option value="motorola">🟢 Motorola</option>
+    <option value="huawei">🟡 Huawei / Honor</option>
+    <option value="oppo">🟣 OPPO / Realme</option>
+    <option value="oneplus">⚫ OnePlus</option>
+    <option value="otros">⚪ Otros Android</option>
+  </select>
+
+  <select id="modelo" onchange="cargarNumeros()">
+    <option value="">-- 2️⃣ Primero elige Marca arriba --</option>
+  </select>
+
+  <select id="numero">
+    <option value="">-- 3️⃣ Primero elige Modelo arriba --</option>
+  </select>
+
+  <button class="btn-gen" onclick="generar()">🔥 GENERAR SENSIBILIDAD 200</button>
+  <p class="ok200">✅ Ningún valor pasa de 200</p>
+</div>
+
+<!-- RESULTADOS -->
+<div id="area-res" class="res">
+  <div class="pest">
+    <div class="pt act" data-p="juego">🎮 Juego</div>
+    <div class="pt" data-p="telefono">📱 Teléfono</div>
+    <div class="pt" data-p="boton">🔘 Botón</div>
+    <div class="pt" data-p="consejos">💡 Consejos</div>
+  </div>
+
+  <!-- === PESTAÑA 1: SENSIBILIDAD DEL JUEGO (0–200) === -->
+  <div class="pc act" id="p-juego">
+    <p class="stit">🎯 Sensibilidad General</p>
+    <div class="fila"><span class="et">General</span><span class="val" id="g">—</span></div>
+    <div class="fila"><span class="et">Mira Punto Rojo</span><span class="val" id="pr">—</span></div>
+    <div class="fila"><span class="et">Mira 2x</span><span class="val" id="d2">—</span></div>
+    <div class="fila"><span class="et">Mira 4x</span><span class="val" id="d4">—</span></div>
+    <div class="fila"><span class="et">Mira Francotirador</span><span class="val" id="fr">—</span></div>
+    <div class="fila"><span class="et">Cámara 360°</span><span class="val" id="cam">—</span></div>
+
+    <p class="stit">🔫 Por Arma</p>
+    <div class="fila"><span class="et">Subfusil (MP40, UMP)</span><span class="val" id="sub">—</span></div>
+    <div class="fila"><span class="et">Escopeta (M1014, M1887)</span><span class="val" id="esc">—</span></div>
+    <div class="fila"><span class="et">Rifle (AK, M4, SCAR)</span><span class="val" id="rif">—</span></div>
+    <div class="fila"><span class="et">Francotirador (AWM, Kar98)</span><span class="val" id="snp">—</span></div>
+  </div>
+
+  <!-- === PESTAÑA 2: TELÉFONO === -->
+  <div class="pc" id="p-telefono">
+    <p class="stit">⚙️ Ajustes del Dispositivo</p>
+    <div class="fila"><span class="et">Tasa de Refresco</span><span class="val" id="hz">—</span></div>
+    <div class="fila"><span class="et">DPI / Ancho Mínimo</span><span class="val" id="dpi">—</span></div>
+    <div class="fila"><span class="et">Velocidad del Puntero</span><span class="val">Al Máximo ✅</span></div>
+    <div class="fila"><span class="et">Animaciones</span><span class="val">Reducidas / 0.5x</span></div>
+    <div class="fila"><span class="et">Modo Rendimiento</span><span class="val">Activado ✅</span></div>
+    <div class="fila"><span class="et">Brillo</span><span class="val">Fijo — No automático</span></div>
+  </div>
+
+  <!-- === PESTAÑA 3: BOTÓN === -->
+  <div class="pc" id="p-boton">
+    <p class="stit">🔘 Botón de Disparo</p>
+    <div class="fila"><span class="et">Tamaño</span><span class="val" id="btam">—</span></div>
+    <div class="fila"><span class="et">Posición</span><span class="val">Abajo derecha, cómoda</span></div>
+    <div class="fila"><span class="et">Distancia del borde</span><span class="val" id="bb">—</span></div>
+    <div class="fila"><span class="et">Zona Muerta</span><span class="val">Media</span></div>
+    <p class="nota">💡 Ajusta de 3 en 3 puntos. No cambies todo de golpe.</p>
+  </div>
+
+  <!-- === PESTAÑA 4: CONSEJOS === -->
+  <div class="pc" id="p-consejos">
+    <p class="stit">🔥 Para levantar mira mejor</p>
+    <div class="fila"><span class="et">Movimiento del dedo</span><span class="val">Suave y recto hacia arriba</span></div>
+    <div class="fila"><span class="et">Presión en pantalla</span><span class="val">Tocar ligero = más fluidez</span></div>
+    <div class="fila"><span class="et">Cerca → rápido / Lejos → suave</span><span class="val">Ajusta según distancia</span></div>
+    <div class="fila"><span class="et">Entrenamiento</span><span class="val">5 min antes de jugar ✅</span></div>
+    <div class="fila"><span class="et">Ajustes</span><span class="val">De 3 en 3 puntos, poco a poco</span></div>
+    <div class="fila"><span class="et">Pantalla limpia</span><span class="val">Sin grasa = mejor respuesta ✅</span></div>
+  </div>
+</div>
+
+<p class="nota" style="text-align:center;margin-top:20px;">Sensy Modificada 👹 • Valores 0–200 • Cada teléfono responde distinto → ajusta a tu mano</p>
+</div>
+
+<script>
+// ==============================================
+// BASE COMPLETA — TODO SEPARADO POR MARCA/MODELO/NÚMERO
+// ==============================================
+const DB = {
+  samsung:{
+    modelos:["Serie A","Serie S","Serie M","Serie Note","Serie Z"],
+    numeros:{
+      "Serie A":["A03","A04","A05","A10","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33 5G","A34 5G","A50","A51","A52","A53 5G","A54 5G","A70","A71","A72","A73"],
+      "Serie S":["S9","S10","S20","S21","S22","S23","S24","S20 FE","S21 FE","S22 Ultra","S23 Ultra","S24 Ultra"],
+      "Serie M":["M12","M22","M32","M42","M52","M53","M54"],
+      "Serie Note":["Note 9","Note 10","Note 20","Note 20 Ultra"],
+      "Serie Z":["Flip 3","Flip 4","Flip 5","Fold 3","Fold 4","Fold 5"]
+    },
+    base:{hz:"60Hz / 90Hz",dpi:"411 dp",g:105,pr:100,d2:110,d4:130,fr:175,cam:140,sub:115,esc:125,rif:105,snp:185,btam:48,bb:22}
+  },
+  blu:{
+    modelos:["Serie Bold","Serie G","Serie M","Serie S","Otro BLU"],
+    numeros:{
+      "Serie Bold":["Bold N1","Bold N2","Bold N3","Bold N5","Bold N7","Bold N8","Bold N9"],
+      "Serie G":["G2","G3","G4","G5","G6","G7","G8","G9"],
+      "Serie M":["M10L","M12","M13","M15","M17","M19"],
+      "Serie S":["S1","S3","S4","S5","S8","S9"]
+    },
+    base:{hz:"60Hz",dpi:"360 dp",g:95,pr:92,d2:100,d4:120,fr:160,cam:125,sub:105,esc:115,rif:95,snp:170,btam:52,bb:25}
+  },
+  xiaomi:{
+    modelos:["Redmi Numero","Redmi Note","POCO","Xiaomi Mi"],
+    numeros:{
+      "Redmi Numero":["9A","9C","10A","10C","12","12C","13C"],
+      "Redmi Note":["Note 9","Note 10","Note 11","Note 12","Note 13","Note 12 Pro","Note 13 Pro"],
+      "POCO":["C40","C50","C65","X3","X5","F3","F5"],
+      "Xiaomi Mi":["11","12","13","14","11 Lite","12 Lite"]
+    },
+    base:{hz:"90Hz / 120Hz",dpi:"392 dp",g:110,pr:105,d2:115,d4:135,fr:180,cam:145,sub:120,esc:130,rif:110,snp:190,btam:46,bb:20}
+  },
+  motorola:{
+    modelos:["Moto G","Moto Edge","Moto E"],
+    numeros:{
+      "Moto G":["G8","G9","G22","G32","G42","G52","G62","G72","G82","G84"],
+      "Moto Edge":["Edge 20","Edge 30","Edge 40","Edge 50","Edge 50 Fusion"],
+      "Moto E":["E13","E22","E32","E40"]
+    },
+    base:{hz:"90Hz / 120Hz",dpi:"400 dp",g:108,pr:103,d2:112,d4:132,fr:178,cam:142,sub:118,esc:128,rif:108,snp:188,btam:47,bb:21}
+  },
+  huawei:{
+    modelos:["P Serie","Mate Serie","Nova","Honor"],
+    numeros:{
+      "P Serie":["P30","P40","P50","P60"],
+      "Mate":["Mate 30","Mate 40","Mate 50","Mate 60"],
+      "Nova":["Nova 7","Nova 8","Nova 9","Nova 10","Nova 11"],
+      "Honor":["X6","X7","X8","X9","90","100"]
+    },
+    base:{hz:"60Hz / 90Hz",dpi:"384 dp",g:102,pr:98,d2:108,d4:128,fr:172,cam:138,sub:112,esc:122,rif:102,snp:182,btam:49,bb:23}
+  },
+  oppo:{
+    modelos:["OPPO A","OPPO Reno","Realme C","Realme Note"],
+    numeros:{
+      "OPPO A":["A15","A16","A17","A31","A53","A54","A57","A77","A96"],
+      "OPPO Reno":["Reno 5","Reno 6","Reno 7","Reno 8","Reno 9","Reno 10"],
+      "Realme C":["C30","C31","C33","C35","C53","C65"],
+      "Realme Note":["Note 50","Note 60","Note 70"]
+    },
+    base:{hz:"90Hz / 120Hz",dpi:"380 dp",g:106,pr:101,d2:110,d4:130,fr:176,cam:140,sub:115,esc:125,rif:105,snp:186,btam:48,bb:22}
+  },
+  oneplus:{
+    modelos:["OnePlus Numero","OnePlus Nord"],
+    numeros:{
+      "OnePlus Numero":["8","9","10","11","12","8T","9T"],
+      "OnePlus Nord":["N10","N20","N30","CE 2","CE 3"]
+    },
+    base:{hz:"120Hz",dpi:"411 dp",g:115,pr:108,d2:120,d4:140,fr:185,cam:150,sub:125,esc:135,rif:115,snp:195,btam:45,bb:18}
+  },
+  otros:{
+    modelos:["Gama Baja","Gama Media","Gama Alta"],
+    numeros:{
+      "Gama Baja":["Menos de 4GB RAM","4GB RAM"],
+      "Gama Media":["6GB RAM","8GB RAM"],
+      "Gama Alta":["12GB RAM o más"]
+    },
+    base:{hz:"60Hz / 90Hz",dpi:"384 dp",g:100,pr:95,d2:105,d4:125,fr:165,cam:130,sub:108,esc:118,rif:98,snp:175,btam:50,bb:24}
+  }
+};
+
+// === NO PASA DE 200 ===
+function val(base, varr=0.08){
+  const min = Math.max(10, Math.round(base * (1 - varr)));
+  const max = Math.min(200, Math.round(base * (1 + varr)));
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// CARGAR MODELOS
+function cargarModelos(){
+  const m = document.getElementById('marca').value;
+  const selMod = document.getElementById('modelo');
+  const selNum = document.getElementById('numero');
+  
+  selMod.innerHTML = '<option value="">-- 2️⃣ Elige Modelo --</option>';
+  selNum.innerHTML = '<option value="">-- 3️⃣ Primero elige Modelo --</option>';
+  
+  if(!m) return;
+  DB[m].modelos.forEach(n=>{
+    const o = document.createElement('option');
+    o.value = n; o.textContent = n; selMod.appendChild(o);
+  });
+}
+
+// CARGAR NÚMEROS
+function cargarNumeros(){
+  const m = document.getElementById('marca').value;
+  const mod = document.getElementById('modelo').value;
+  const selNum = document.getElementById('numero');
+  
+  selNum.innerHTML = '<option value="">-- 3️⃣ Elige tu Número --</option>';
+  if(!m || !mod || !DB[m].numeros[mod]) return;
+  
+  DB[m].numeros[mod].forEach(n=>{
+    const o = document.createElement('option');
+    o.value = n; o.textContent = n; selNum.appendChild(o);
+  });
+}
+
+// GENERAR TODO
+function generar(){
+  const m = document.getElementById('marca').value;
+  const mod = document.getElementById('modelo').value;
+  const num = document.getElementById('numero').value;
+  
+  if(!m || !mod || !num){
+    alert('⚠️ Sigue los 3 pasos:\n1️⃣ Marca\n2️⃣ Modelo\n3️⃣ Número');
+    return;
+  }
+  
+  const b = DB[m].base;
+  
+  // === JUEGO — TODOS 0–200 ===
+  document.getElementById('g').textContent = val(b.g);
+  document.getElementById('pr').textContent = val(b.pr);
+  document.getElementById('d2').textContent = val(b.d2);
+  document.getElementById('d4').textContent = val(b.d4);
+  document.getElementById('fr').textContent = val(b.fr, 0.1);
+  document.getElementById('cam').textContent = val(b.cam);
+  document.getElementById('sub').textContent = val(b.sub);
+  document.getElementById('esc').textContent = val(b.esc);
+  document.getElementById('rif').textContent = val(b.rif);
+  document.getElementById('snp').textContent = val(b.snp, 0.1);
+  
+  // === TELÉFONO ===
+  document.getElementById('hz').textContent = b.hz;
+  document.getElementById('dpi').textContent = b.dpi;
+  
+  // === BOTÓN ===
+  document.getElementById('btam').textContent = val(b.btam, 0.1) + '%';
+  document.getElementById('bb').textContent = b.bb + '%';
+  
+  // MOSTRAR
+  document.getElementById('area-res').classList.add('act');
+}
+
+// PESTAÑAS
+document.querySelectorAll('.pt').forEach(p=>{
+  p.addEventListener('click', ()=>{
+    document.querySelectorAll('.pt').forEach(x=>x.classList.remove('act'));
+    document.querySelectorAll('.pc').forEach(x=>x.classList.remove('act'));
+    p.classList.add('act');
+    document.getElementById('p-' + p.dataset.p).classList.add('act');
+  });
+});
+</script>
+</body>
+</html>
