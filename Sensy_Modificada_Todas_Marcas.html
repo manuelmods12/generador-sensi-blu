@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Sensy Modificada 👹</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+:root{
+  --f0:#000; --f1:#0a0000; --f2:#1a0202;
+  --r:#ff0033; --r2:#ff4d6d; --n:#ff8800; --d:#ffcc00;
+  --m:#bb00ff; --borde:#ff2222; --t:#fff;
+  --sombra:0 0 25px rgba(255,0,50,.5);
+  --sombraF:0 0 45px rgba(255,0,50,.8);
+}
+
+body{
+  background:linear-gradient(180deg,#000,#110000,#000);
+  color:var(--t);min-height:100vh;
+}
+
+.portada{
+  height:38vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;position:relative;overflow:hidden;
+  border-bottom:2px solid var(--r);box-shadow:var(--sombraF);
+}
+.fondo-ico{
+  position:absolute;font-size:9rem;opacity:.15;filter:blur(2px);
+  animation:respirar 2.5s ease-in-out infinite alternate;
+}
+@keyframes respirar{
+  from{transform:scale(1);}to{transform:scale(1.15);}
+}
+.tit{
+  font-size:2.4rem;font-weight:900;letter-spacing:4px;
+  background:linear-gradient(180deg,#fff,#ff6666,var(--r),var(--n));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 40px rgba(255,0,50,.6);z-index:2;
+  animation:brillo 2s ease-in-out infinite alternate;
+}
+@keyframes brillo{
+  from{filter:brightness(1);}to{filter:brightness(1.3);}
+}
+.sub{color:#ff8888;font-size:.85rem;margin-top:8px;letter-spacing:2px;text-transform:uppercase;}
+.etiq200{
+  margin-top:12px;padding:7px 26px;
+  background:linear-gradient(90deg,var(--r),var(--n),var(--r));
+  background-size:200% 100%;border-radius:30px;font-weight:bold;font-size:.85rem;
+  animation:etqBrillo 1.5s linear infinite;
+}
+@keyframes etqBrillo{
+  0%{background-position:0% 0%;}100%{background-position:200% 0%;}
+}
+
+.cont{padding:18px;max-width:540px;margin:0 auto;padding-bottom:60px;}
+
+.caja{
+  background:linear-gradient(135deg,#1a0505,#110000);
+  border:1px solid var(--borde);border-radius:16px;padding:20px;margin-bottom:18px;
+  box-shadow:var(--sombra);transition:transform .2s;
+}
+.caja:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(255,0,50,.6);}
+.ctit{font-size:1rem;font-weight:bold;color:var(--r);margin-bottom:10px;display:flex;gap:8px;}
+.cdesc{font-size:.8rem;color:#aaa;margin-bottom:12px;line-height:1.5;}
+
+select,button{
+  width:100%;padding:12px;background:#0a0a0a;border:1px solid var(--r);
+  color:#fff;border-radius:10px;font-size:.9rem;margin-bottom:10px;outline:none;
+}
+select:focus{border-color:var(--d);box-shadow:0 0 15px rgba(255,200,0,.5);}
+
+.btn-gen{
+  background:linear-gradient(90deg,var(--r),var(--n),var(--r));
+  background-size:200% 100%;border:none;font-weight:bold;font-size:1.1rem;
+  padding:14px;cursor:pointer;box-shadow:0 0 25px rgba(255,0,50,.6);
+  transition:all .3s;margin-top:5px;animation:btnBrillo 2s linear infinite;
+}
+@keyframes btnBrillo{
+  0%{background-position:0% 0%;}100%{background-position:200% 0%;}
+}
+.btn-gen:hover{transform:scale(1.05);box-shadow:0 0 45px rgba(255,0,50,.9);}
+
+.res{
+  margin-top:15px;padding:18px;background:rgba(0,0,0,.75);border-radius:12px;
+  border-left:4px solid var(--d);display:none;box-shadow:var(--sombra);
+}
+.res.act{display:block;animation:aparecer .4s ease-out;}
+@keyframes aparecer{
+  from{opacity:0;transform:translateY(15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.fila{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #222;}
+.fila:last-child{border-bottom:none;}
+.et{color:#aaa;font-size:.85rem;}
+.val{color:var(--d);font-weight:bold;font-size:.9rem;}
+.stit{color:var(--n);font-weight:bold;margin:14px 0 8px 0;font-size:.95rem;}
+
+.pest{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap;}
+.pt{
+  flex:1;min-width:75px;padding:10px;background:#111;border:1px solid #333;
+  color:#888;border-radius:8px;text-align:center;cursor:pointer;font-size:.75rem;
+  transition:all .2s;
+}
+.pt.act{border-color:var(--r);color:#fff;background:rgba(255,0,50,.15);box-shadow:0 0 15px rgba(255,0,50,.4);}
+.pc{display:none;}
+.pc.act{display:block;animation:aparecer .3s ease-out;}
+
+.nota{font-size:.7rem;color:#666;margin-top:10px;line-height:1.5;}
+.ok200{color:#0f0;font-size:.75rem;margin-top:8px;}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <span class="fondo-ico">👹</span>
+  <h1 class="tit">Sensy Modificada</h1>
+  <p class="sub">TODAS LAS MARCAS ANDROID • LÍMITE 200</p>
+  <div class="etiq200">✅ 0 — 200 • Cada modelo separado</div>
+</div>
+
+<div class="cont">
+
+<!-- SELECCIÓN COMPLETA -->
+<div class="caja">
+  <p class="ctit">📱 Tu Dispositivo — 3 Pasos</p>
+  <p class="cdesc">1️⃣ Marca → 2️⃣ Familia/Serie → 3️⃣ Modelo Exacto • Todo separado ✅</p>
+
+  <select id="marca" onchange="cargarModelos()">
+    <option value="">-- 1️⃣ Elige MARCA --</option>
+    <option value="samsung">🔵 Samsung</option>
+    <option value="xiaomi">🔴 Xiaomi</option>
+    <option value="redmi">🟠 Redmi</option>
+    <option value="poco">🟡 POCO</option>
+    <option value="motorola">🟢 Motorola</option>
+    <option value="huawei">🟡 Huawei</option>
+    <option value="oppo">🟣 OPPO</option>
+    <option value="vivo">🔵 Vivo</option>
+    <option value="realme">🟢 Realme</option>
+    <option value="oneplus">⚫ OnePlus</option>
+    <option value="infinix">🟠 Infinix</option>
+    <option value="tecno">🔵 Tecno</option>
+    <option value="honor">🟣 Honor</option>
+    <option value="google">🟢 Google Pixel</option>
+    <option value="zte">⚪ ZTE</option>
+    <option value="nokia">🔵 Nokia</option>
+    <option value="sony">🟣 Sony Xperia</option>
+    <option value="asus">🔴 ASUS</option>
+    <option value="nothing">⚫ Nothing</option>
+    <option value="tcl">🟡 TCL</option>
+  </select>
+
+  <select id="modelo" onchange="cargarNumeros()">
+    <option value="">-- 2️⃣ Primero elige Marca --</option>
+  </select>
+
+  <select id="numero">
+    <option value="">-- 3️⃣ Primero elige Serie --</option>
+  </select>
+
+  <button class="btn-gen" onclick="generar()">🔥 GENERAR SENSIBILIDAD</button>
+  <p class="ok200">✅ Ningún valor supera 200</p>
+</div>
+
+<!-- RESULTADOS -->
+<div id="area-res" class="res">
+  <div class="pest">
+    <div class="pt act" data-p="juego">🎮 Juego</div>
+    <div class="pt" data-p="telefono">📱 Teléfono</div>
+    <div class="pt" data-p="boton">🔘 Botón</div>
+    <div class="pt" data-p="consejos">💡 Consejos</div>
+  </div>
+
+  <div class="pc act" id="p-juego">
+    <p class="stit">🎯 Sensibilidad General</p>
+    <div class="fila"><span class="et">General</span><span class="val" id="g">—</span></div>
+    <div class="fila"><span class="et">Mira Punto Rojo</span><span class="val" id="pr">—</span></div>
+    <div class="fila"><span class="et">Mira 2x</span><span class="val" id="d2">—</span></div>
+    <div class="fila"><span class="et">Mira 4x</span><span class="val" id="d4">—</span></div>
+    <div class="fila"><span class="et">Mira Francotirador</span><span class="val" id="fr">—</span></div>
+    <div class="fila"><span class="et">Cámara 360°</span><span class="val" id="cam">—</span></div>
+
+    <p class="stit">🔫 Por Tipo de Arma</p>
+    <div class="fila"><span class="et">Subfusil (MP40,UMP)</span><span class="val" id="sub">—</span></div>
+    <div class="fila"><span class="et">Escopeta (M1014,M1887)</span><span class="val" id="esc">—</span></div>
+    <div class="fila"><span class="et">Rifle (AK,M4,SCAR)</span><span class="val" id="rif">—</span></div>
+    <div class="fila"><span class="et">Francotirador (AWM)</span><span class="val" id="snp">—</span></div>
+  </div>
+
+  <div class="pc" id="p-telefono">
+    <p class="stit">⚙️ Ajustes del Dispositivo</p>
+    <div class="fila"><span class="et">Tasa de Refresco</span><span class="val" id="hz">—</span></div>
+    <div class="fila"><span class="et">DPI / Ancho Mínimo</span><span class="val" id="dpi">—</span></div>
+    <div class="fila"><span class="et">Velocidad del Puntero</span><span class="val">Al Máximo ✅</span></div>
+    <div class="fila"><span class="et">Animaciones</span><span class="val">0.5x o Desactivadas</span></div>
+    <div class="fila"><span class="et">Modo Rendimiento</span><span class="val">Activado ✅</span></div>
+    <div class="fila"><span class="et">Brillo</span><span class="val">Fijo — No automático</span></div>
+  </div>
+
+  <div class="pc" id="p-boton">
+    <p class="stit">🔘 Botón de Disparo</p>
+    <div class="fila"><span class="et">Tamaño</span><span class="val" id="btam">—</span></div>
+    <div class="fila"><span class="et">Posición</span><span class="val">Abajo derecha cómoda</span></div>
+    <div class="fila"><span class="et">Distancia del borde</span><span class="val" id="bb">—</span></div>
+    <div class="fila"><span class="et">Zona Muerta</span><span class="val">Media</span></div>
+    <p class="nota">💡 Ajusta de 3 en 3 puntos. No cambies todo de golpe.</p>
+  </div>
+
+  <div class="pc" id="p-consejos">
+    <p class="stit">🔥 Para levantar mira mejor</p>
+    <div class="fila"><span class="et">Movimiento del dedo</span><span class="val">Recto y suave hacia arriba</span></div>
+    <div class="fila"><span class="et">Presión</span><span class="val">Tocar ligero = más fluidez</span></div>
+    <div class="fila"><span class="et">Cerca → rápido / Lejos → suave</span><span class="val">Ajusta según distancia</span></div>
+    <div class="fila"><span class="et">Entrenamiento</span><span class="val">5 min antes de jugar ✅</span></div>
+    <div class="fila"><span class="et">Ajustes</span><span class="val">De 3 en 3 puntos</span></div>
+    <div class="fila"><span class="et">Pantalla limpia</span><span class="val">Sin grasa = mejor respuesta ✅</span></div>
+  </div>
+</div>
+
+<p class="nota" style="text-align:center;margin-top:15px;">Sensy Modificada 👹 • 20 Marcas • Valores 0–200 • Ajusta a tu mano</p>
+</div>
+
+<script>
+// ==================================================
+// BASE COMPLETA — LAS 20 MARCAS QUE PEDISTE
+// ==================================================
+const DB = {
+samsung:{
+  modelos:["Serie A","Serie S","Serie M","Serie Note","Serie Z"],
+  numeros:{
+    "Serie A":["A03","A04","A05","A10","A12","A13","A14","A20","A21","A22","A23","A24","A31","A32","A33 5G","A34 5G","A51","A52","A53 5G","A54 5G","A71","A72","A73"],
+    "Serie S":["S9","S10","S20","S21","S22","S23","S24","S20 FE","S21 FE","S22 Ultra","S23 Ultra","S24 Ultra"],
+    "Serie M":["M12","M22","M32","M42","M52","M53","M54"],
+    "Serie Note":["Note 9","Note 10","Note 20","Note 20 Ultra"],
+    "Serie Z":["Flip 3","Flip 4","Flip 5","Fold 3","Fold 4","Fold 5"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"411 dp",g:105,pr:100,d2:110,d4:130,fr:175,cam:140,sub:115,esc:125,rif:105,snp:185,btam:48,bb:22}
+},
+xiaomi:{
+  modelos:["Xiaomi Numero","Xiaomi Lite","Xiaomi Note"],
+  numeros:{
+    "Xiaomi Numero":["11","12","13","14","15"],
+    "Xiaomi Lite":["11 Lite","12 Lite","13 Lite"],
+    "Xiaomi Note":["12 Pro","13 Pro","14 Pro"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"393 dp",g:110,pr:105,d2:115,d4:135,fr:180,cam:145,sub:120,esc:130,rif:110,snp:190,btam:46,bb:20}
+},
+redmi:{
+  modelos:["Redmi Básico","Redmi Note"],
+  numeros:{
+    "Redmi Básico":["9A","9C","10A","10C","12","12C","13C"],
+    "Redmi Note":["Note 9","Note 10","Note 11","Note 12","Note 13","Note 12 Pro","Note 13 Pro"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"392 dp",g:108,pr:103,d2:113,d4:133,fr:178,cam:143,sub:118,esc:128,rif:108,snp:188,btam:47,bb:21}
+},
+poco:{
+  modelos:["POCO C","POCO X","POCO F"],
+  numeros:{
+    "POCO C":["C40","C50","C51","C55","C65"],
+    "POCO X":["X3","X5","X6","X3 Pro","X5 Pro"],
+    "POCO F":["F3","F4","F5","F6"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"395 dp",g:112,pr:107,d2:117,d4:137,fr:182,cam:147,sub:122,esc:132,rif:112,snp:192,btam:46,bb:19}
+},
+motorola:{
+  modelos:["Moto E","Moto G","Moto Edge"],
+  numeros:{
+    "Moto E":["E13","E22","E32","E40"],
+    "Moto G":["G8","G9","G22","G32","G42","G52","G62","G72","G82","G84"],
+    "Moto Edge":["Edge 20","Edge 30","Edge 40","Edge 50","Edge 50 Fusion"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"400 dp",g:108,pr:103,d2:112,d4:132,fr:178,cam:142,sub:118,esc:128,rif:108,snp:188,btam:47,bb:21}
+},
+huawei:{
+  modelos:["P Serie","Mate Serie","Nova"],
+  numeros:{
+    "P Serie":["P30","P40","P50","P60"],
+    "Mate Serie":["Mate 30","Mate 40","Mate 50","Mate 60"],
+    "Nova":["Nova 7","Nova 8","Nova 9","Nova 10","Nova 11","Nova 12"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"384 dp",g:102,pr:98,d2:108,d4:128,fr:172,cam:138,sub:112,esc:122,rif:102,snp:182,btam:49,bb:23}
+},
+oppo:{
+  modelos:["OPPO A","OPPO Reno","OPPO Find"],
+  numeros:{
+    "OPPO A":["A15","A16","A17","A31","A53","A54","A57","A77","A96"],
+    "OPPO Reno":["Reno 5","Reno 6","Reno 7","Reno 8","Reno 9","Reno 10","Reno 11"],
+    "OPPO Find":["X5","X6","X7"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"380 dp",g:106,pr:101,d2:110,d4:130,fr:176,cam:140,sub:115,esc:125,rif:105,snp:186,btam:48,bb:22}
+},
+vivo:{
+  modelos:["Vivo Y","Vivo V","Vivo X"],
+  numeros:{
+    "Vivo Y":["Y02","Y11","Y16","Y20","Y22","Y27","Y36"],
+    "Vivo V":["V21","V23","V25","V27","V29","V30"],
+    "Vivo X":["X60","X70","X80","X90","X100"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"384 dp",g:107,pr:102,d2:111,d4:131,fr:177,cam:141,sub:116,esc:126,rif:106,snp:187,btam:48,bb:22}
+},
+realme:{
+  modelos:["Realme C","Realme Note","Realme Numero"],
+  numeros:{
+    "Realme C":["C30","C31","C33","C35","C53","C55","C65"],
+    "Realme Note":["Note 50","Note 60","Note 70"],
+    "Realme Numero":["10","11","12","12 Pro","GT Neo 5"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"380 dp",g:109,pr:104,d2:114,d4:134,fr:179,cam:144,sub:119,esc:129,rif:109,snp:189,btam:47,bb:21}
+},
+oneplus:{
+  modelos:["OnePlus Numero","OnePlus Nord"],
+  numeros:{
+    "OnePlus Numero":["8","9","10","11","12","8T","9T"],
+    "OnePlus Nord":["N10","N20","N30","CE 2","CE 3"]
+  },
+  base:{hz:"120Hz",dpi:"411 dp",g:115,pr:108,d2:120,d4:140,fr:185,cam:150,sub:125,esc:135,rif:115,snp:195,btam:45,bb:18}
+},
+infinix:{
+  modelos:["Hot","Note","Zero"],
+  numeros:{
+    "Hot":["Hot 12","Hot 20","Hot 30","Hot 40","Hot 50"],
+    "Note":["Note 12","Note 30","Note 30 Pro","Note 40"],
+    "Zero":["Zero 30","Zero 50"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"360 dp",g:103,pr:99,d2:107,d4:127,fr:173,cam:139,sub:113,esc:123,rif:103,snp:183,btam:49,bb:23}
+},
+tecno:{
+  modelos:["Spark","Camon","Pova"],
+  numeros:{
+    "Spark":["Spark 8","Spark 9","Spark 10","Spark 20","Spark Go"],
+    "Camon":["Camon 19","Camon 20","Camon 30","Camon 30 Pro"],
+    "Pova":["Pova 3","Pova 4","Pova 5"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"360 dp",g:102,pr:98,d2:106,d4:126,fr:171,cam:137,sub:111,esc:121,rif:101,snp:181,btam:49,bb:23}
+},
+honor:{
+  modelos:["Honor X","Honor Numero","Honor Magic"],
+  numeros:{
+    "Honor X":["X6","X7","X8","X9","X9a"],
+    "Honor Numero":["90","100","200"],
+    "Honor Magic":["Magic 5","Magic 6","Magic 6 Pro"]
+  },
+  base:{hz:"90Hz / 120Hz",dpi:"384 dp",g:108,pr:103,d2:113,d4:133,fr:178,cam:143,sub:118,esc:128,rif:108,snp:188,btam:47,bb:21}
+},
+google:{
+  modelos:["Pixel A","Pixel Numero"],
+  numeros:{
+    "Pixel A":["Pixel A7","Pixel A6","Pixel A5","Pixel A4"],
+    "Pixel Numero":["7","8","9","10","11","12","13","14"]
+  },
+  base:{hz:"60Hz / 90Hz / 120Hz",dpi:"412 dp",g:114,pr:107,d2:119,d4:139,fr:184,cam:149,sub:124,esc:134,rif:114,snp:194,btam:45,bb:19}
+},
+zte:{
+  modelos:["Blade","Axon"],
+  numeros:{
+    "Blade":["A34","A54","V40","V50","L220"],
+    "Axon":["Axon 30","Axon 40","Axon 50"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"360 dp",g:101,pr:97,d2:105,d4:125,fr:170,cam:135,sub:110,esc:120,rif:100,snp:180,btam:50,bb:24}
+},
+nokia:{
+  modelos:["G Serie","X Serie"],
+  numeros:{
+    "G Serie":["G22","G42","G60","G11","G21","G31"],
+    "X Serie":["X10","X20","X30","X100"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"384 dp",g:104,pr:100,d2:109,d4:129,fr:174,cam:140,sub:114,esc:124,rif:104,snp:184,btam:48,bb:22}
+},
+sony:{
+  modelos:["Xperia 1","Xperia 5","Xperia 10"],
+  numeros:{
+    "Xperia 1":["1 II","1 III","1 IV","1 V","1 VI"],
+    "Xperia 5":["5 II","5 III","5 IV","5 V"],
+    "Xperia 10":["10 II","10 III","10 IV","10 V"]
+  },
+  base:{hz:"60Hz / 120Hz",dpi:"411 dp",g:111,pr:106,d2:116,d4:136,fr:181,cam:146,sub:121,esc:131,rif:111,snp:191,btam:46,bb:20}
+},
+asus:{
+  modelos:["Zenfone","ROG Phone"],
+  numeros:{
+    "Zenfone":["9","10","11","12","Zenfone 10","Zenfone 11 Ultra"],
+    "ROG Phone":["6","7","8","9","6 Pro","7 Ultimate","8 Pro"]
+  },
+  base:{hz:"120Hz / 144Hz",dpi:"411 dp",g:118,pr:111,d2:123,d4:143,fr:188,cam:153,sub:128,esc:138,rif:118,snp:198,btam:44,bb:17}
+},
+nothing:{
+  modelos:["Phone"],
+  numeros:{
+    "Phone":["Phone (1)","Phone (2)","Phone (2a)","Phone (3a)"]
+  },
+  base:{hz:"120Hz",dpi:"411 dp",g:113,pr:107,d2:118,d4:138,fr:183,cam:148,sub:123,esc:133,rif:113,snp:193,btam:45,bb:19}
+},
+tcl:{
+  modelos:["TCL Numero","TCL 30/40/50"],
+  numeros:{
+    "TCL Numero":["20","30","40","50"],
+    "TCL 30/40/50":["30 SE","30+","40 SE","40X","50 SE","50 5G"]
+  },
+  base:{hz:"60Hz / 90Hz",dpi:"360 dp",g:100,pr:96,d2:104,d4:124,fr:168,cam:133,sub:109,esc:119,rif:99,snp:178,btam:50,bb:24}
+}
+};
+
+// === NO PASA DE 200 ===
+function val(base, varr=0.08){
+  const min = Math.max(10, Math.round(base * (1 - varr)));
+  const max = Math.min(200, Math.round(base * (1 + varr)));
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// CARGAR MODELOS/SERIES
+function cargarModelos(){
+  const m = document.getElementById('marca').value;
+  const selMod = document.getElementById('modelo');
+  const selNum = document.getElementById('numero');
+  
+  selMod.innerHTML = '<option value="">-- 2️⃣ Elige Serie/Familia --</option>';
+  selNum.innerHTML = '<option value="">-- 3️⃣ Primero elige Serie --</option>';
+  
+  if(!m) return;
+  DB[m].modelos.forEach(n=>{
+    const o = document.createElement('option');
+    o.value = n; o.textContent = n; selMod.appendChild(o);
+  });
+}
+
+// CARGAR NÚMEROS/MODELOS EXACTOS
+function cargarNumeros(){
+  const m = document.getElementById('marca').value;
+  const mod = document.getElementById('modelo').value;
+  const selNum = document.getElementById('numero');
+  
+  selNum.innerHTML = '<option value="">-- 3️⃣ Elige tu Modelo Exacto --</option>';
+  if(!m || !mod || !DB[m].numeros[mod]) return;
+  
+  DB[m].numeros[mod].forEach(n=>{
+    const o = document.createElement('option');
+    o.value = n; o.textContent = n; selNum.appendChild(o);
+  });
+}
+
+// GENERAR TODO
+function generar(){
+  const m = document.getElementById('marca').value;
+  const mod = document.getElementById('modelo').value;
+  const num = document.getElementById('numero').value;
+  
+  if(!m || !mod || !num){
+    alert('⚠️ Sigue los 3 pasos:\n1️⃣ Marca\n2️⃣ Serie/Familia\n3️⃣ Modelo Exacto');
+    return;
+  }
+  
+  const b = DB[m].base;
+  
+  // === JUEGO — TODOS 0–200 ===
+  document.getElementById('g').textContent = val(b.g);
+  document.getElementById('pr').textContent = val(b.pr);
+  document.getElementById('d2').textContent = val(b.d2);
+  document.getElementById('d4').textContent = val(b.d4);
+  document.getElementById('fr').textContent = val(b.fr, 0.1);
+  document.getElementById('cam').textContent = val(b.cam);
+  document.getElementById('sub').textContent = val(b.sub);
+  document.getElementById('esc').textContent = val(b.esc);
+  document.getElementById('rif').textContent = val(b.rif);
+  document.getElementById('snp').textContent = val(b.snp, 0.1);
+  
+  // === TELÉFONO ===
+  document.getElementById('hz').textContent = b.hz;
+  document.getElementById('dpi').textContent = b.dpi;
+  
+  // === BOTÓN ===
+  document.getElementById('btam').textContent = val(b.btam, 0.1) + '%';
+  document.getElementById('bb').textContent = b.bb + '%';
+  
+  // MOSTRAR
+  document.getElementById('area-res').classList.add('act');
+}
+
+// PESTAÑAS
+document.querySelectorAll('.pt').forEach(p=>{
+  p.addEventListener('click', ()=>{
+    document.querySelectorAll('.pt').forEach(x=>x.classList.remove('act'));
+    document.querySelectorAll('.pc').forEach(x=>x.classList.remove('act'));
+    p.classList.add('act');
+    document.getElementById('p-' + p.dataset.p).classList.add('act');
+  });
+});
+</script>
+</body>
+</html>
